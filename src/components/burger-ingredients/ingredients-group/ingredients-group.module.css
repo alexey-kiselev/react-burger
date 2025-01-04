@@ -1,0 +1,17 @@
+.component {
+  width: 100%;
+}
+
+.title {
+  composes: pt-10 text text_type_main-medium from global;
+}
+
+.ingredients {
+  composes: pt-6 pb-10 pl-4 pr-4 from global;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 32px;
+  column-gap: 24px;
+}
