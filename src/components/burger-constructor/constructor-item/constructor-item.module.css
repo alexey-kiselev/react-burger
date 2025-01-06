@@ -1,0 +1,10 @@
+.burger_constructor_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+}
+
+.burger_constructor_drag_icon {
+  width: 32px;
+}

@@ -1,5 +1,6 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState } from 'react'
+import { IBurgerConstructor } from '../burger-constructor/burger-constructor'
 import styles from './burger-ingredients.module.css'
 import BurgerIngredientsGroup from './ingredients-group/ingredients-group'
 
@@ -7,10 +8,6 @@ export interface IBurgerIngredientItem {
   _id: string, type: string, name: string, price: number, image: string
 }
 export interface IBurgerIngredientGroup { type: string, title: string }
-export interface IBurgerConstructor {
-  bun: { top: { _id: string }, bottom: { _id: string } },
-  ingredients: { _id: string }[]
-}
 
 export default function BurgerIngredients({ ingredients, groups, burgerConstructor }: {
   ingredients: IBurgerIngredientItem[],

@@ -1,4 +1,5 @@
-import { IBurgerConstructor, IBurgerIngredientGroup, IBurgerIngredientItem } from '../burger-ingredients'
+import { IBurgerConstructor } from '../../burger-constructor/burger-constructor'
+import { IBurgerIngredientGroup, IBurgerIngredientItem } from '../burger-ingredients'
 import BurgerIngredientsItem from '../ingredients-item/ingredients-item'
 import styles from './ingredients-group.module.css'
 
