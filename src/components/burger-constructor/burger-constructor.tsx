@@ -36,8 +36,8 @@ export default function BurgerConstructor({
         )}
       </div>
       <div className={styles.burger_constructor_ingredients}>
-        {burgerIngredients.map((ingredient) => (
-          <BurgerConstructorItem ingredient={ingredient} />
+        {burgerIngredients.map((ingredient, index) => (
+          <BurgerConstructorItem ingredient={ingredient} key={index} />
         ))}
       </div>
       <div className={styles.burger_constructor_bun}>
@@ -45,7 +45,7 @@ export default function BurgerConstructor({
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={bunBottom.name}
+            text={bunBottom.name + " (низ)"}
             price={bunBottom.price}
             thumbnail={bunBottom.image}
             key={"bun_buttom_" + bunBottom._id}
