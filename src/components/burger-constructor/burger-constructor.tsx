@@ -1,5 +1,7 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
+import { useState } from "react"
 import { IBurgerIngredientItem } from "../burger-ingredients/burger-ingredients"
+import OrderDetails from "../order-details/order-details"
 import styles from "./burger-constructor.module.css"
 import BurgerConstructorItem from "./constructor-item/constructor-item"
 
@@ -15,11 +17,21 @@ export default function BurgerConstructor({
   burgerConstructor: IBurgerConstructor
   ingredients: IBurgerIngredientItem[]
 }) {
+  const [isVisibleOrderDetails, setIsVisibleOrderDetails] = useState(false)
+
   const bunTop = ingredients.find((ingredient) => (ingredient._id = burgerConstructor.bun.top._id))
   const bunBottom = ingredients.find((ingredient) => (ingredient._id = burgerConstructor.bun.bottom._id))
   const burgerIngredients = burgerConstructor.ingredients
     .map((searchIngredient) => ingredients.find((ingredient) => ingredient._id === searchIngredient._id))
     .filter((ingredient) => ingredient !== undefined)
+
+  const handleSubmitOrder = () => {
+    setIsVisibleOrderDetails(true)
+  }
+
+  const handleCloseOrderDetails = () => {
+    setIsVisibleOrderDetails(false)
+  }
 
   return (
     <div className={styles.burger_constructor}>
@@ -56,9 +68,10 @@ export default function BurgerConstructor({
         <p className={styles.total_price}>
           7562 <CurrencyIcon type="primary" />
         </p>
-        <Button htmlType="submit" type="primary" size="large" extraClass="ml-10">
+        <Button htmlType="submit" type="primary" size="large" extraClass="ml-10" onClick={handleSubmitOrder}>
           Оформить заказ
         </Button>
+        {isVisibleOrderDetails && <OrderDetails onClose={handleCloseOrderDetails} />}
       </div>
     </div>
   )
