@@ -1,9 +1,12 @@
-import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { IBurgerIngredientItem } from '../burger-ingredients'
-import styles from './ingredients-item.module.css'
+import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
+import { IBurgerIngredientItem } from "../burger-ingredients"
+import styles from "./ingredients-item.module.css"
 
-export default function BurgerIngredientsItem({ ingredient, count }: {
-  ingredient: IBurgerIngredientItem,
+export default function BurgerIngredientsItem({
+  ingredient,
+  count,
+}: {
+  ingredient: IBurgerIngredientItem
   count: number
 }) {
   return (
