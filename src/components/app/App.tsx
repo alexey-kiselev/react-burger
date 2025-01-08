@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
+import AppHeader from "../app-header/app-header"
+import BurgerConstructor from "../burger-constructor/burger-constructor"
+import BurgerIngredients from "../burger-ingredients/burger-ingredients"
+import OneMessagePage from "../one-message-page/one-message-page"
 import "./App.css"
 import styles from "./App.module.css"
-import AppHeader from "./components/app-header/app-header"
-import BurgerConstructor from "./components/burger-constructor/burger-constructor"
-import BurgerIngredients from "./components/burger-ingredients/burger-ingredients"
-import OneMessagePage from "./components/one-message-page/one-message-page"
 
 const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients"
 
