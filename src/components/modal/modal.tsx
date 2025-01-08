@@ -16,6 +16,8 @@ export default function Modal({
   children: React.ReactNode
   onClose: CallbackFunction
 }) {
+  const withTitle = typeof title !== "undefined" && title.trim() !== ""
+
   const eventKeydown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
       onClose()
@@ -41,7 +43,9 @@ export default function Modal({
     >
       <div className={styles.modal}>
         <ModalHeader title={title} onClose={onClose} />
-        <div className={styles.modal_content}>{children}</div>
+        <div className={withTitle ? styles.modal_content_with_title : styles.modal_content_without_title}>
+          {children}
+        </div>
       </div>
     </div>,
     modalRoot

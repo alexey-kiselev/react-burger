@@ -1,5 +1,5 @@
 import { IBurgerConstructor } from "../../burger-constructor/burger-constructor"
-import { IBurgerIngredientGroup, IBurgerIngredientItem } from "../burger-ingredients"
+import { IBurgerIngredientGroup, IBurgerIngredientItem, IngredientClickFunction } from "../burger-ingredients"
 import BurgerIngredientsItem from "../ingredients-item/ingredients-item"
 import styles from "./ingredients-group.module.css"
 
@@ -20,10 +20,12 @@ export default function BurgerIngredientsGroup({
   group,
   ingredients,
   burgerConstructor,
+  onClickIngredient,
 }: {
   group: IBurgerIngredientGroup
   ingredients: IBurgerIngredientItem[]
   burgerConstructor: IBurgerConstructor
+  onClickIngredient: IngredientClickFunction
 }) {
   return (
     <div className={styles.component}>
@@ -34,6 +36,7 @@ export default function BurgerIngredientsGroup({
             ingredient={ingredient}
             count={getIngredientCountFromConstructor({ ingredient, burgerConstructor })}
             key={ingredient._id}
+            onClickIngredient={onClickIngredient}
           />
         ))}
       </div>

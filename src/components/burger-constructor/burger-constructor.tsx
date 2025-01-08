@@ -49,7 +49,7 @@ export default function BurgerConstructor({
       </div>
       <div className={styles.burger_constructor_ingredients}>
         {burgerIngredients.map((ingredient, index) => (
-          <BurgerConstructorItem ingredient={ingredient} key={index} />
+          <BurgerConstructorItem ingredient={ingredient!} key={index} />
         ))}
       </div>
       <div className={styles.burger_constructor_bun}>

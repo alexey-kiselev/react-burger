@@ -1,8 +1,11 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react"
 import { IBurgerConstructor } from "../burger-constructor/burger-constructor"
+import IngredientDetails from "../ingredient-details/ingredient-details"
 import styles from "./burger-ingredients.module.css"
 import BurgerIngredientsGroup from "./ingredients-group/ingredients-group"
+
+export type IngredientClickFunction = (ingredient: IBurgerIngredientItem) => void
 
 export interface IBurgerIngredientItem {
   _id: string
@@ -10,6 +13,10 @@ export interface IBurgerIngredientItem {
   name: string
   price: number
   image: string
+  calories: number
+  proteins: number
+  fat: number
+  carbohydrates: number
 }
 export interface IBurgerIngredientGroup {
   type: string
@@ -26,6 +33,19 @@ export default function BurgerIngredients({
   burgerConstructor: IBurgerConstructor
 }) {
   const [currentGroup, setCurrentGroup] = useState(groups[0].type)
+  const [isVisibleIngredientDetails, setIsVisibleIngredientDetails] = useState(false)
+  const [selectedIngredient, setSelectedIngredient] = useState<IBurgerIngredientItem>()
+
+  const handleClickIngredient = (ingredient: IBurgerIngredientItem) => {
+    setSelectedIngredient(ingredient)
+    setIsVisibleIngredientDetails(true)
+  }
+
+  const handleCloseDetails = () => {
+    setIsVisibleIngredientDetails(false)
+    setSelectedIngredient(undefined)
+  }
+
   return (
     <div className={styles.component}>
       <h1 className={styles.title}>Соберите бургер</h1>
@@ -43,9 +63,13 @@ export default function BurgerIngredients({
             ingredients={ingredients.filter((ingredient) => ingredient.type === group.type)}
             burgerConstructor={burgerConstructor}
             key={group.type}
+            onClickIngredient={handleClickIngredient}
           />
         ))}
       </div>
+      {isVisibleIngredientDetails && (
+        <IngredientDetails ingredient={selectedIngredient!} onClose={handleCloseDetails} />
+      )}
     </div>
   )
 }
