@@ -1,30 +1,35 @@
-# React + TypeScript + Vite
+# Stellar Burgers
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- [Ссылки](#ссылки)
+- [Разработка](#разработка)
+- [Code Style](#code-style)
 
-Currently, two official plugins are available:
+## Ссылки
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Макет Figma](https://www.figma.com/file/zFGN2O5xktHl9VmoOieq5E/React-_-Проектные-задачи_external_link?node-id=0%3A1)
+- UI-компоненты Яндекс -
+  [npm](https://www.npmjs.com/package/@ya.praktikum/react-developer-burger-ui-components),
+  [документация](https://yandex-practicum.github.io/react-developer-burger-ui-components/docs/)
 
-## Expanding the ESLint configuration
+## Разработка
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+```bash
+npm install
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Code Style
+
+Файловая структура:
+
+- Компоненты хранятся в директории `src/components/`, шрифты — в `src/fonts/`, изображения — в `src/images/`.
+- Каждый компонент хранится в отдельной директории.
+- Для стилизации компонентов используется CSS-модули.
+- Директории и файлы компонентов называются в kebab-case нотации.
+
+HTML-верстка:
+
+- Использовать семантические HTML5-элементы, которые точно располагаются на главной странице: `header`, `nav`, `main`, `section`.
+- Оформлять повторяющиеся элементы в неупорядоченные списки.
+- Стараться не использовать элемент `div`. Он подходит исключительно для «упаковки» нескольких блоков с их последующей стилизацией и построением сетки.
