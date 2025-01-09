@@ -8,7 +8,7 @@ import styles from "./App.module.css"
 
 const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients"
 
-const infredientsGroups = [
+const ingredientsGroups = [
   { title: "Булки", type: "bun" },
   { title: "Соусы", type: "sauce" },
   { title: "Начинки", type: "main" },
@@ -61,7 +61,7 @@ export default function App() {
           <div className={styles.content_burger_ingredients}>
             <BurgerIngredients
               ingredients={ingredients}
-              groups={infredientsGroups}
+              groups={ingredientsGroups}
               burgerConstructor={burgerConstructor}
             />
           </div>
