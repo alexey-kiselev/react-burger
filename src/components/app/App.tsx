@@ -36,7 +36,12 @@ export default function App({ ingredientsUrl }: { ingredientsUrl: string }) {
     setHasError(undefined)
     setIngredients([])
     fetch(ingredientsUrl)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Server response is not OK")
+        }
+        return res.json()
+      })
       .then((data) => {
         setIngredients(data.data)
         setHasError(false)
