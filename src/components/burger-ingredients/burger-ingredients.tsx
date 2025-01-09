@@ -1,7 +1,9 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react"
 import { IBurgerConstructor } from "../burger-constructor/burger-constructor"
-import IngredientDetails from "../ingredient-details/ingredient-details"
+import { IngredientDetails } from "../ingredient-details/ingredient-details"
+import ModalOverlay from "../modal-overlay/modal-overlay"
+import Modal from "../modal/modal"
 import styles from "./burger-ingredients.module.css"
 import BurgerIngredientsGroup from "./ingredients-group/ingredients-group"
 
@@ -68,7 +70,12 @@ export default function BurgerIngredients({
         ))}
       </div>
       {isVisibleIngredientDetails && (
-        <IngredientDetails ingredient={selectedIngredient!} onClose={handleCloseDetails} />
+        <>
+          <Modal title="Детали ингредиента" onClose={handleCloseDetails}>
+            <IngredientDetails ingredient={selectedIngredient!} />
+          </Modal>
+          <ModalOverlay />
+        </>
       )}
     </div>
   )
