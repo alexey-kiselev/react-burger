@@ -9,11 +9,19 @@ export default function AppHeader() {
       <div className={styles.container}>
         <NavMenu>
           <div>
-            <NavItem title="Конструктор" Icon={BurgerIcon} active={true} />
-            <NavItem title="Лента заказов" Icon={ListIcon} />
+            <a href="#" className={styles.link}>
+              <NavItem title="Конструктор" Icon={BurgerIcon} active={true} />
+            </a>
+            <a href="#" className={styles.link}>
+              <NavItem title="Лента заказов" Icon={ListIcon} />
+            </a>
           </div>
-          <Logo />
-          <NavItem title="Личный кабинет" Icon={ProfileIcon} />
+          <a href="#" className={styles.link}>
+            <Logo />
+          </a>
+          <a href="#" className={styles.link}>
+            <NavItem title="Личный кабинет" Icon={ProfileIcon} />
+          </a>
         </NavMenu>
       </div>
     </div>

@@ -3,7 +3,6 @@
   display: inline-flex;
   align-items: center;
   color: #666782;
-  cursor: pointer;
 }
 
 .nav_item_active {
