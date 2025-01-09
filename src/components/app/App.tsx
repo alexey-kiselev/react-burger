@@ -6,8 +6,6 @@ import OneMessagePage from "../one-message-page/one-message-page"
 import "./App.css"
 import styles from "./App.module.css"
 
-const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients"
-
 const ingredientsGroups = [
   { title: "Булки", type: "bun" },
   { title: "Соусы", type: "sauce" },
@@ -28,7 +26,7 @@ const burgerConstructor = {
   ],
 }
 
-export default function App() {
+export default function App({ ingredientsUrl }: { ingredientsUrl: string }) {
   const [isLoading, setIsLoading] = useState<boolean>()
   const [hasError, setHasError] = useState<boolean>()
   const [ingredients, setIngredients] = useState([])
