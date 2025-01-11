@@ -1,0 +1,18 @@
+.header {
+  background-color: #1c1c21;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  min-width: 1240px;
+  max-width: 1240px;
+}
+
+.link {
+  text-decoration: none;
+}

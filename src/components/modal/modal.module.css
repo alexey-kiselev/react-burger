@@ -1,0 +1,24 @@
+.modal_wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 800px;
+  background-color: #1c1c21;
+  border-radius: 15px;
+}
+
+.modal_content_with_title {
+  composes: ml-30 mr-30 mb-15 from global;
+}
+
+.modal_content_without_title {
+  composes: ml-30 mr-30 mb-30 from global;
+}

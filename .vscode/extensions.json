@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "eamodio.gitlens",
+    "dsznajder.es7-react-js-snippets",
+    "dbaeumer.vscode-eslint",
+    "burkeholland.simple-react-snippets",
+    "esbenp.prettier-vscode",
+    "biomejs.biome",
+    "viijay-kr.react-ts-css",
+    "yzhang.markdown-all-in-one"
+  ]
+}

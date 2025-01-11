@@ -1,0 +1,36 @@
+.burger_constructor {
+  composes: pt-25 pb-10 pl-4 pr-4 from global;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.burger_constructor_bun {
+  composes: pl-7 pr-5 from global;
+}
+
+.burger_constructor_ingredients {
+  composes: pr-2 custom-scroll from global;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  min-height: 200px;
+  overflow-y: auto;
+  scrollbar-color: #2f2f37 #8585ad;
+  scrollbar-width: thin;
+}
+
+.bottom_line {
+  composes: pt-10 from global;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+}
+
+.total_price {
+  composes: text text_type_digits-medium from global;
+  display: inline-block;
+}

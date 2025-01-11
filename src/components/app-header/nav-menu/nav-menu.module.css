@@ -1,0 +1,8 @@
+.nav_menu {
+  composes: p-4 from global;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
