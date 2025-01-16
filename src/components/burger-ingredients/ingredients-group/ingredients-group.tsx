@@ -14,7 +14,7 @@ function getIngredientCountFromConstructor({
   ingredient: IBurgerIngredientItem
   burgerConstructor: IBurgerConstructor
 }) {
-  if (ingredient._id === burgerConstructor.bun.top._id || ingredient._id === burgerConstructor.bun.bottom._id) {
+  if (ingredient._id === burgerConstructor.bun._id || ingredient._id === burgerConstructor.bun._id) {
     return 1
   }
   return burgerConstructor.ingredients.filter((search) => search._id === ingredient._id).length

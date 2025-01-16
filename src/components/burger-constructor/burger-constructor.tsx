@@ -1,21 +1,18 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react"
-import { IBurgerConstructor, IBurgerIngredientItem } from "../../services/types"
+import { useAppSelector } from "../../services/hooks"
+import { selectIngredients } from "../../services/ingredients/reducers"
+import { IBurgerConstructor } from "../../services/types"
 import OrderDetails from "../order-details/order-details"
 import styles from "./burger-constructor.module.css"
 import BurgerConstructorItem from "./constructor-item/constructor-item"
 
-export default function BurgerConstructor({
-  burgerConstructor,
-  ingredients,
-}: {
-  burgerConstructor: IBurgerConstructor
-  ingredients: IBurgerIngredientItem[]
-}) {
+export default function BurgerConstructor({ burgerConstructor }: { burgerConstructor: IBurgerConstructor }) {
+  const ingredients = useAppSelector(selectIngredients)
   const [isVisibleOrderDetails, setIsVisibleOrderDetails] = useState(false)
 
-  const bunTop = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun.top._id)
-  const bunBottom = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun.bottom._id)
+  const bunTop = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun._id)
+  const bunBottom = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun._id)
   const burgerIngredients = burgerConstructor.ingredients
     .map((searchIngredient) => ingredients.find((ingredient) => ingredient._id === searchIngredient._id))
     .filter((ingredient) => ingredient !== undefined)

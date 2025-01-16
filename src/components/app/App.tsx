@@ -10,10 +10,7 @@ import "./App.css"
 import styles from "./App.module.css"
 
 const burgerConstructor = {
-  bun: {
-    top: { _id: "643d69a5c3f7b9001cfa093c" }, // Краторная булка N-200i"
-    bottom: { _id: "643d69a5c3f7b9001cfa093c" }, // Краторная булка N-200i"
-  },
+  bun: { _id: "643d69a5c3f7b9001cfa093c" }, // Краторная булка N-200i"
   ingredients: [
     { _id: "643d69a5c3f7b9001cfa0944" }, // Соус традиционный галактический
     { _id: "643d69a5c3f7b9001cfa093f" }, // Мясо бессмертных моллюсков Protostomi
@@ -24,7 +21,7 @@ const burgerConstructor = {
 }
 
 export default function App() {
-  const { loading, error, ingredients } = useAppSelector(selectIngredientsState)
+  const { loading, error } = useAppSelector(selectIngredientsState)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -43,10 +40,10 @@ export default function App() {
       <div className={styles.content}>
         <div className={styles.container}>
           <div className={styles.content_burger_ingredients}>
-            <BurgerIngredients ingredients={ingredients} burgerConstructor={burgerConstructor} />
+            <BurgerIngredients burgerConstructor={burgerConstructor} />
           </div>
           <div className={styles.content_burger_constructor}>
-            <BurgerConstructor ingredients={ingredients} burgerConstructor={burgerConstructor} />
+            <BurgerConstructor burgerConstructor={burgerConstructor} />
           </div>
         </div>
       </div>
