@@ -1,13 +1,14 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react"
+import { selectBurgerConstructor } from "../../services/burger-constructor/reducers"
 import { useAppSelector } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients/reducers"
-import { IBurgerConstructor } from "../../services/types"
 import OrderDetails from "../order-details/order-details"
 import styles from "./burger-constructor.module.css"
 import BurgerConstructorItem from "./constructor-item/constructor-item"
 
-export default function BurgerConstructor({ burgerConstructor }: { burgerConstructor: IBurgerConstructor }) {
+export default function BurgerConstructor() {
+  const burgerConstructor = useAppSelector(selectBurgerConstructor)
   const ingredients = useAppSelector(selectIngredients)
   const [isVisibleOrderDetails, setIsVisibleOrderDetails] = useState(false)
 

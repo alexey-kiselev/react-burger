@@ -9,17 +9,6 @@ import OneMessagePage from "../one-message-page/one-message-page"
 import "./App.css"
 import styles from "./App.module.css"
 
-const burgerConstructor = {
-  bun: { _id: "643d69a5c3f7b9001cfa093c" }, // Краторная булка N-200i"
-  ingredients: [
-    { _id: "643d69a5c3f7b9001cfa0944" }, // Соус традиционный галактический
-    { _id: "643d69a5c3f7b9001cfa093f" }, // Мясо бессмертных моллюсков Protostomi
-    { _id: "643d69a5c3f7b9001cfa0947" }, // Плоды Фалленианского дерева
-    { _id: "643d69a5c3f7b9001cfa0946" }, // Хрустящие минеральные кольца
-    { _id: "643d69a5c3f7b9001cfa0946" }, // Хрустящие минеральные кольца
-  ],
-}
-
 export default function App() {
   const { loading, error } = useAppSelector(selectIngredientsState)
   const dispatch = useAppDispatch()
@@ -40,10 +29,10 @@ export default function App() {
       <div className={styles.content}>
         <div className={styles.container}>
           <div className={styles.content_burger_ingredients}>
-            <BurgerIngredients burgerConstructor={burgerConstructor} />
+            <BurgerIngredients />
           </div>
           <div className={styles.content_burger_constructor}>
-            <BurgerConstructor burgerConstructor={burgerConstructor} />
+            <BurgerConstructor />
           </div>
         </div>
       </div>

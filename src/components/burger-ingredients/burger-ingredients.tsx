@@ -2,7 +2,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react"
 import { useAppSelector } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients/reducers"
-import { IBurgerConstructor, IBurgerIngredientGroup, IBurgerIngredientItem } from "../../services/types"
+import { IBurgerIngredientGroup, IBurgerIngredientItem } from "../../services/types"
 import { IngredientDetails } from "../ingredient-details/ingredient-details"
 import ModalOverlay from "../modal-overlay/modal-overlay"
 import Modal from "../modal/modal"
@@ -15,7 +15,7 @@ const groups: IBurgerIngredientGroup[] = [
   { title: "Начинки", type: "main" },
 ]
 
-export default function BurgerIngredients({ burgerConstructor }: { burgerConstructor: IBurgerConstructor }) {
+export default function BurgerIngredients() {
   const [currentGroup, setCurrentGroup] = useState(groups[0].type)
   const [isVisibleIngredientDetails, setIsVisibleIngredientDetails] = useState(false)
   const [selectedIngredient, setSelectedIngredient] = useState<IBurgerIngredientItem>()
@@ -46,7 +46,6 @@ export default function BurgerIngredients({ burgerConstructor }: { burgerConstru
           <BurgerIngredientsGroup
             group={group}
             ingredients={ingredients.filter((ingredient) => ingredient.type === group.type)}
-            burgerConstructor={burgerConstructor}
             key={group.type}
             onClickIngredient={handleClickIngredient}
           />

@@ -1,3 +1,5 @@
+import { selectBurgerConstructor } from "../../../services/burger-constructor/reducers"
+import { useAppSelector } from "../../../services/hooks"
 import {
   IBurgerConstructor,
   IBurgerIngredientGroup,
@@ -23,14 +25,14 @@ function getIngredientCountFromConstructor({
 export default function BurgerIngredientsGroup({
   group,
   ingredients,
-  burgerConstructor,
   onClickIngredient,
 }: {
   group: IBurgerIngredientGroup
   ingredients: IBurgerIngredientItem[]
-  burgerConstructor: IBurgerConstructor
   onClickIngredient: TIngredientClickFunction
 }) {
+  const burgerConstructor = useAppSelector(selectBurgerConstructor)
+
   return (
     <div className={styles.component}>
       <h2 className={styles.title}>{group.title}</h2>
