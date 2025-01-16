@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useAppDispatch, useAppSelector } from "../../services/hooks"
+import { getIngredients } from "../../services/ingredients/actions"
+import { selectIngredientsState } from "../../services/ingredients/reducers"
 import AppHeader from "../app-header/app-header"
 import BurgerConstructor from "../burger-constructor/burger-constructor"
 import BurgerIngredients from "../burger-ingredients/burger-ingredients"
 import OneMessagePage from "../one-message-page/one-message-page"
 import "./App.css"
 import styles from "./App.module.css"
-
-const ingredientsGroups = [
-  { title: "Булки", type: "bun" },
-  { title: "Соусы", type: "sauce" },
-  { title: "Начинки", type: "main" },
-]
 
 const burgerConstructor = {
   bun: {
@@ -26,33 +23,17 @@ const burgerConstructor = {
   ],
 }
 
-export default function App({ ingredientsUrl }: { ingredientsUrl: string }) {
-  const [isLoading, setIsLoading] = useState<boolean>()
-  const [hasError, setHasError] = useState<boolean>()
-  const [ingredients, setIngredients] = useState([])
+export default function App() {
+  const { loading, error, ingredients } = useAppSelector(selectIngredientsState)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    setIsLoading(true)
-    setHasError(undefined)
-    setIngredients([])
-    fetch(ingredientsUrl)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Server response is not OK")
-        }
-        return res.json()
-      })
-      .then((data) => {
-        setIngredients(data.data)
-        setHasError(false)
-      })
-      .catch(() => setHasError(true))
-    setIsLoading(false)
-  }, [])
+    dispatch(getIngredients())
+  }, [dispatch])
 
-  if (isLoading === true) return <OneMessagePage message="Идёт загрузка, обождите..." />
+  if (loading) return <OneMessagePage message="Идёт загрузка, обождите..." />
 
-  if (hasError === true) return <OneMessagePage message="Что-то пошло не так :(" />
+  if (error) return <OneMessagePage message="Что-то пошло не так :(" />
 
   return (
     <div className={styles.app}>
@@ -62,11 +43,7 @@ export default function App({ ingredientsUrl }: { ingredientsUrl: string }) {
       <div className={styles.content}>
         <div className={styles.container}>
           <div className={styles.content_burger_ingredients}>
-            <BurgerIngredients
-              ingredients={ingredients}
-              groups={ingredientsGroups}
-              burgerConstructor={burgerConstructor}
-            />
+            <BurgerIngredients ingredients={ingredients} burgerConstructor={burgerConstructor} />
           </div>
           <div className={styles.content_burger_constructor}>
             <BurgerConstructor ingredients={ingredients} burgerConstructor={burgerConstructor} />

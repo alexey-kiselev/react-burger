@@ -7,13 +7,17 @@ import Modal from "../modal/modal"
 import styles from "./burger-ingredients.module.css"
 import BurgerIngredientsGroup from "./ingredients-group/ingredients-group"
 
+const groups: IBurgerIngredientGroup[] = [
+  { title: "Булки", type: "bun" },
+  { title: "Соусы", type: "sauce" },
+  { title: "Начинки", type: "main" },
+]
+
 export default function BurgerIngredients({
   ingredients,
-  groups,
   burgerConstructor,
 }: {
   ingredients: IBurgerIngredientItem[]
-  groups: IBurgerIngredientGroup[]
   burgerConstructor: IBurgerConstructor
 }) {
   const [currentGroup, setCurrentGroup] = useState(groups[0].type)
