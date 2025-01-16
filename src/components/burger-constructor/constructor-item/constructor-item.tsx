@@ -1,5 +1,5 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components"
-import { IBurgerIngredientItem } from "../../burger-ingredients/burger-ingredients"
+import { IBurgerIngredientItem } from "../../../services/types"
 import styles from "./constructor-item.module.css"
 
 export default function BurgerConstructorItem({ ingredient }: { ingredient: IBurgerIngredientItem }) {

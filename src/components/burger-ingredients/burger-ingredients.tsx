@@ -1,29 +1,11 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react"
-import { IBurgerConstructor } from "../burger-constructor/burger-constructor"
+import { IBurgerConstructor, IBurgerIngredientGroup, IBurgerIngredientItem } from "../../services/types"
 import { IngredientDetails } from "../ingredient-details/ingredient-details"
 import ModalOverlay from "../modal-overlay/modal-overlay"
 import Modal from "../modal/modal"
 import styles from "./burger-ingredients.module.css"
 import BurgerIngredientsGroup from "./ingredients-group/ingredients-group"
-
-export type IngredientClickFunction = (ingredient: IBurgerIngredientItem) => void
-
-export interface IBurgerIngredientItem {
-  _id: string
-  type: string
-  name: string
-  price: number
-  image: string
-  calories: number
-  proteins: number
-  fat: number
-  carbohydrates: number
-}
-export interface IBurgerIngredientGroup {
-  type: string
-  title: string
-}
 
 export default function BurgerIngredients({
   ingredients,

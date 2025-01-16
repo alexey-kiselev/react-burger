@@ -1,5 +1,5 @@
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
-import { IBurgerIngredientItem, IngredientClickFunction } from "../burger-ingredients"
+import { IBurgerIngredientItem, TIngredientClickFunction } from "../../../services/types"
 import styles from "./ingredients-item.module.css"
 
 export default function BurgerIngredientsItem({
@@ -9,7 +9,7 @@ export default function BurgerIngredientsItem({
 }: {
   ingredient: IBurgerIngredientItem
   count: number
-  onClickIngredient: IngredientClickFunction
+  onClickIngredient: TIngredientClickFunction
 }) {
   return (
     <div className={styles.component} onClick={() => onClickIngredient(ingredient)}>

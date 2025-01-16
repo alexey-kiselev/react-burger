@@ -1,14 +1,9 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react"
-import { IBurgerIngredientItem } from "../burger-ingredients/burger-ingredients"
+import { IBurgerConstructor, IBurgerIngredientItem } from "../../services/types"
 import OrderDetails from "../order-details/order-details"
 import styles from "./burger-constructor.module.css"
 import BurgerConstructorItem from "./constructor-item/constructor-item"
-
-export interface IBurgerConstructor {
-  bun: { top: { _id: string }; bottom: { _id: string } }
-  ingredients: { _id: string }[]
-}
 
 export default function BurgerConstructor({
   burgerConstructor,

@@ -1,5 +1,4 @@
-import { IBurgerIngredientItem } from "../burger-ingredients/burger-ingredients"
-
+import { IBurgerIngredientItem } from "../../services/types"
 import styles from "./ingredient-details.module.css"
 
 export function IngredientDetails({ ingredient }: { ingredient: IBurgerIngredientItem }) {

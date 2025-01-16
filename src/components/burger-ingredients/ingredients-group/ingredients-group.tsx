@@ -1,5 +1,9 @@
-import { IBurgerConstructor } from "../../burger-constructor/burger-constructor"
-import { IBurgerIngredientGroup, IBurgerIngredientItem, IngredientClickFunction } from "../burger-ingredients"
+import {
+  IBurgerConstructor,
+  IBurgerIngredientGroup,
+  IBurgerIngredientItem,
+  TIngredientClickFunction,
+} from "../../../services/types"
 import BurgerIngredientsItem from "../ingredients-item/ingredients-item"
 import styles from "./ingredients-group.module.css"
 
@@ -25,7 +29,7 @@ export default function BurgerIngredientsGroup({
   group: IBurgerIngredientGroup
   ingredients: IBurgerIngredientItem[]
   burgerConstructor: IBurgerConstructor
-  onClickIngredient: IngredientClickFunction
+  onClickIngredient: TIngredientClickFunction
 }) {
   return (
     <div className={styles.component}>
