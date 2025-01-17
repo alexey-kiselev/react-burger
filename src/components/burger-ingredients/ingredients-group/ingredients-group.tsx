@@ -1,3 +1,4 @@
+import { MutableRefObject } from "react"
 import { selectBurgerConstructor } from "../../../services/burger-constructor/reducers"
 import { useAppSelector } from "../../../services/hooks"
 import {
@@ -23,10 +24,12 @@ function getIngredientCountFromConstructor({
 }
 
 export default function BurgerIngredientsGroup({
+  headerRef,
   group,
   ingredients,
   onClickIngredient,
 }: {
+  headerRef: MutableRefObject<HTMLDivElement | null>
   group: IBurgerIngredientGroup
   ingredients: IBurgerIngredientItem[]
   onClickIngredient: TIngredientClickFunction
@@ -34,7 +37,7 @@ export default function BurgerIngredientsGroup({
   const burgerConstructor = useAppSelector(selectBurgerConstructor)
 
   return (
-    <div className={styles.component}>
+    <div className={styles.component} ref={headerRef}>
       <h2 className={styles.title}>{group.title}</h2>
       <div className={styles.ingredients}>
         {ingredients.map((ingredient) => (
