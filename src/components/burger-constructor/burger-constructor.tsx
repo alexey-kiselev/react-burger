@@ -12,8 +12,8 @@ export default function BurgerConstructor() {
   const ingredients = useAppSelector(selectIngredients)
   const [isVisibleOrderDetails, setIsVisibleOrderDetails] = useState(false)
 
-  const bunTop = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun._id)
-  const bunBottom = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun._id)
+  const bunTop = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun?._id)
+  const bunBottom = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun?._id)
   const burgerIngredients = burgerConstructor.ingredients
     .map((searchIngredient) => ingredients.find((ingredient) => ingredient._id === searchIngredient._id))
     .filter((ingredient) => ingredient !== undefined)

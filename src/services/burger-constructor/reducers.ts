@@ -2,14 +2,8 @@ import { createSlice } from "@reduxjs/toolkit/react"
 import { IBurgerConstructor } from "../types"
 
 const initialState: IBurgerConstructor = {
-  bun: { _id: "643d69a5c3f7b9001cfa093c" }, // Краторная булка N-200i"
-  ingredients: [
-    { _id: "643d69a5c3f7b9001cfa0944" }, // Соус традиционный галактический
-    { _id: "643d69a5c3f7b9001cfa093f" }, // Мясо бессмертных моллюсков Protostomi
-    { _id: "643d69a5c3f7b9001cfa0947" }, // Плоды Фалленианского дерева
-    { _id: "643d69a5c3f7b9001cfa0946" }, // Хрустящие минеральные кольца
-    { _id: "643d69a5c3f7b9001cfa0946" }, // Хрустящие минеральные кольца
-  ],
+  bun: null,
+  ingredients: [],
 }
 
 export const burgerConstructorSlice = createSlice({

@@ -18,6 +18,6 @@ export interface IBurgerIngredientGroup {
 }
 
 export interface IBurgerConstructor {
-  bun: { _id: string }
+  bun: { _id: string } | null
   ingredients: { _id: string }[]
 }
