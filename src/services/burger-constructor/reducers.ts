@@ -11,7 +11,16 @@ export const burgerConstructorSlice = createSlice({
   initialState,
   reducers: {
     setBurgerBun(state: IBurgerConstructor, action: PayloadAction<IBurgerIngredientItem>) {
-      state.bun = action.payload
+      state.bun = { _id: action.payload._id }
+    },
+    addMiddleIngredientToTop(state: IBurgerConstructor, action: PayloadAction<IBurgerIngredientItem>) {
+      state.ingredients = [{ _id: action.payload._id }, ...state.ingredients]
+    },
+    addMiddleIngredientToBottom(state: IBurgerConstructor, action: PayloadAction<IBurgerIngredientItem>) {
+      state.ingredients.push({ _id: action.payload._id })
+    },
+    deleteIngredientByIndex(state: IBurgerConstructor, action: PayloadAction<number>) {
+      state.ingredients.splice(action.payload, 1)
     },
   },
   selectors: {
@@ -19,5 +28,6 @@ export const burgerConstructorSlice = createSlice({
   },
 })
 
-export const { setBurgerBun } = burgerConstructorSlice.actions
+export const { setBurgerBun, addMiddleIngredientToTop, addMiddleIngredientToBottom, deleteIngredientByIndex } =
+  burgerConstructorSlice.actions
 export const { selectBurgerConstructor } = burgerConstructorSlice.selectors

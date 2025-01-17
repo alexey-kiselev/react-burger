@@ -49,17 +49,16 @@ export default function BurgerConstructor() {
         )}
       </div>
       <div className={styles.burger_constructor_ingredients}>
-        {burgerIngredients.length > 0 ? (
-          burgerIngredients.map((ingredient, index) => <BurgerConstructorItem ingredient={ingredient!} key={index} />)
-        ) : (
-          <>
-            {[1, 2, 3].map((item) => (
-              <DropContainer ingredientType="middle_ingredient" key={item}>
-                <IngredientPlaceholder ingredientType="middle_ingredient" text="Добавь соус или начинку по вкусу" />
-              </DropContainer>
-            ))}
-          </>
-        )}
+        <DropContainer ingredientType="middle_ingredient_to_top">
+          <IngredientPlaceholder ingredientType="middle_ingredient" text="Добавь соус или начинку по вкусу" />
+        </DropContainer>
+        {burgerIngredients.length > 0 &&
+          burgerIngredients.map((ingredient, index) => (
+            <BurgerConstructorItem ingredient={ingredient!} key={index} constructorIngredientIndex={index} />
+          ))}
+        <DropContainer ingredientType="middle_ingredient_to_bottom">
+          <IngredientPlaceholder ingredientType="middle_ingredient" text="Добавь соус или начинку по вкусу" />
+        </DropContainer>
       </div>
       <div className={styles.burger_constructor_bun}>
         {bunBottom ? (
