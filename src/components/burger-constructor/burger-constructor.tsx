@@ -6,6 +6,8 @@ import { selectIngredients } from "../../services/ingredients/reducers"
 import OrderDetails from "../order-details/order-details"
 import styles from "./burger-constructor.module.css"
 import BurgerConstructorItem from "./constructor-item/constructor-item"
+import DropContainer from "./drop-container/drop-container"
+import IngredientPlaceholder from "./ingredient-placeholder/ingredient-placeholder"
 
 export default function BurgerConstructor() {
   const burgerConstructor = useAppSelector(selectBurgerConstructor)
@@ -29,32 +31,52 @@ export default function BurgerConstructor() {
   return (
     <div className={styles.burger_constructor}>
       <div className={styles.burger_constructor_bun}>
-        {bunTop && (
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text={bunTop.name + " (верх)"}
-            price={bunTop.price}
-            thumbnail={bunTop.image}
-            key={"bun_top_" + bunTop._id}
-          />
+        {bunTop ? (
+          <DropContainer ingredientType="bun_top">
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={bunTop.name + " (верх)"}
+              price={bunTop.price}
+              thumbnail={bunTop.image}
+              key={"bun_top_" + bunTop._id}
+            />
+          </DropContainer>
+        ) : (
+          <DropContainer ingredientType="bun_top">
+            <IngredientPlaceholder ingredientType="bun_top" text="Кинь в меня булкой" />
+          </DropContainer>
         )}
       </div>
       <div className={styles.burger_constructor_ingredients}>
-        {burgerIngredients.map((ingredient, index) => (
-          <BurgerConstructorItem ingredient={ingredient!} key={index} />
-        ))}
+        {burgerIngredients.length > 0 ? (
+          burgerIngredients.map((ingredient, index) => <BurgerConstructorItem ingredient={ingredient!} key={index} />)
+        ) : (
+          <>
+            {[1, 2, 3].map((item) => (
+              <DropContainer ingredientType="middle_ingredient" key={item}>
+                <IngredientPlaceholder ingredientType="middle_ingredient" text="Добавь соус или начинку по вкусу" />
+              </DropContainer>
+            ))}
+          </>
+        )}
       </div>
       <div className={styles.burger_constructor_bun}>
-        {bunBottom && (
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text={bunBottom.name + " (низ)"}
-            price={bunBottom.price}
-            thumbnail={bunBottom.image}
-            key={"bun_buttom_" + bunBottom._id}
-          />
+        {bunBottom ? (
+          <DropContainer ingredientType="bun_bottom">
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={bunBottom.name + " (низ)"}
+              price={bunBottom.price}
+              thumbnail={bunBottom.image}
+              key={"bun_buttom_" + bunBottom._id}
+            />
+          </DropContainer>
+        ) : (
+          <DropContainer ingredientType="bun_bottom">
+            <IngredientPlaceholder ingredientType="bun_bottom" text="Кинь в меня булкой" />
+          </DropContainer>
         )}
       </div>
       <div className={styles.bottom_line}>

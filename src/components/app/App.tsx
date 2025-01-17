@@ -1,4 +1,6 @@
 import { useEffect } from "react"
+import { DndProvider } from "react-dnd"
+import { HTML5Backend } from "react-dnd-html5-backend"
 import { useAppDispatch, useAppSelector } from "../../services/hooks"
 import { getIngredients } from "../../services/ingredients/actions"
 import { selectIngredientsState } from "../../services/ingredients/reducers"
@@ -23,19 +25,21 @@ export default function App() {
 
   return (
     <div className={styles.app}>
-      <div className={styles.header}>
-        <AppHeader />
-      </div>
-      <div className={styles.content}>
-        <div className={styles.container}>
-          <div className={styles.content_burger_ingredients}>
-            <BurgerIngredients />
-          </div>
-          <div className={styles.content_burger_constructor}>
-            <BurgerConstructor />
+      <DndProvider backend={HTML5Backend}>
+        <div className={styles.header}>
+          <AppHeader />
+        </div>
+        <div className={styles.content}>
+          <div className={styles.container}>
+            <div className={styles.content_burger_ingredients}>
+              <BurgerIngredients />
+            </div>
+            <div className={styles.content_burger_constructor}>
+              <BurgerConstructor />
+            </div>
           </div>
         </div>
-      </div>
+      </DndProvider>
     </div>
   )
 }

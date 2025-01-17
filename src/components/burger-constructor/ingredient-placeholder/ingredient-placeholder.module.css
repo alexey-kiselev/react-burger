@@ -1,0 +1,35 @@
+.placeholder_top {
+  border-radius: var(--top-constructor-item-border-radius);
+  background: var(--background-element);
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder_middle {
+  border-radius: var(--common-border-radius-s);
+  background: var(--background-element);
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder_bottom {
+  border-radius: var(--bottom-constructor-item-border-radius);
+  background: var(--background-element);
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder_over {
+  border: 2px solid #801ab3;
+}
+
+.placeholder_text {
+  color: #f2f2f3;
+  font-family: "Jet Brains Mono";
+}
