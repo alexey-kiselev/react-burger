@@ -5,7 +5,7 @@ import NavMenu from "./nav-menu/nav-menu"
 
 export default function AppHeader() {
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <div className={styles.container}>
         <NavMenu>
           <div>
@@ -24,6 +24,6 @@ export default function AppHeader() {
           </a>
         </NavMenu>
       </div>
-    </div>
+    </header>
   )
 }
