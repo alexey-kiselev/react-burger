@@ -46,6 +46,10 @@ export const burgerConstructorSlice = createSlice({
     deleteIngredientByIndex(state: IBurgerConstructor, action: PayloadAction<number>) {
       state.ingredients.splice(action.payload, 1)
     },
+    cleanupConstructor(state: IBurgerConstructor) {
+      state.bun = null
+      state.ingredients = []
+    },
   },
   selectors: {
     selectBurgerConstructor: (state) => state,
@@ -59,5 +63,6 @@ export const {
   deleteIngredientByIndex,
   changeMiddleIngredientByIndex,
   changeMiddleIngredientsByIndexes,
+  cleanupConstructor,
 } = burgerConstructorSlice.actions
 export const { selectBurgerConstructor } = burgerConstructorSlice.selectors
