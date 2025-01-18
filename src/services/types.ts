@@ -8,6 +8,7 @@ export interface IBurgerIngredientItem {
   proteins: number
   fat: number
   carbohydrates: number
+  uuid?: string | null
 }
 
 export type TIngredientClickFunction = (ingredient: IBurgerIngredientItem) => void
@@ -17,9 +18,14 @@ export interface IBurgerIngredientGroup {
   title: string
 }
 
+export interface IBurgerConstructorIngredientItem {
+  _id: string
+  uuid: string
+}
+
 export interface IBurgerConstructor {
   bun: { _id: string } | null
-  ingredients: { _id: string }[]
+  ingredients: IBurgerConstructorIngredientItem[]
 }
 
 export interface IBurgerItemDragItem {

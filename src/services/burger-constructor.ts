@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit/react"
+import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit/react"
 import { IBurgerConstructor, IBurgerIngredientItem } from "./types"
 
 const initialState: IBurgerConstructor = {
@@ -13,17 +13,29 @@ export const burgerConstructorSlice = createSlice({
     setBurgerBun(state: IBurgerConstructor, action: PayloadAction<IBurgerIngredientItem>) {
       state.bun = { _id: action.payload._id }
     },
-    addMiddleIngredientToTop(state: IBurgerConstructor, action: PayloadAction<IBurgerIngredientItem>) {
-      state.ingredients = [{ _id: action.payload._id }, ...state.ingredients]
+    addMiddleIngredientToTop: {
+      reducer: (state: IBurgerConstructor, action: PayloadAction<IBurgerIngredientItem>) => {
+        state.ingredients = [{ _id: action.payload._id, uuid: nanoid() }, ...state.ingredients]
+      },
+      prepare: (ingredient: IBurgerIngredientItem) => {
+        const uuid = nanoid()
+        return { payload: { ...ingredient, uuid: uuid } }
+      },
     },
-    addMiddleIngredientToBottom(state: IBurgerConstructor, action: PayloadAction<IBurgerIngredientItem>) {
-      state.ingredients.push({ _id: action.payload._id })
+    addMiddleIngredientToBottom: {
+      reducer: (state: IBurgerConstructor, action: PayloadAction<IBurgerIngredientItem>) => {
+        state.ingredients.push({ _id: action.payload._id, uuid: action.payload.uuid! })
+      },
+      prepare: (ingredient: IBurgerIngredientItem) => {
+        const uuid = nanoid()
+        return { payload: { ...ingredient, uuid: uuid } }
+      },
     },
     changeMiddleIngredientByIndex(
       state: IBurgerConstructor,
       action: PayloadAction<{ ingredient: IBurgerIngredientItem; index: number }>
     ) {
-      state.ingredients[action.payload.index] = action.payload.ingredient
+      state.ingredients[action.payload.index]._id = action.payload.ingredient._id
     },
     changeMiddleIngredientsByIndexes(
       state: IBurgerConstructor,

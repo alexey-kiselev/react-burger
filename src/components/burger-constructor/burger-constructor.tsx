@@ -4,11 +4,26 @@ import { selectBurgerConstructor } from "../../services/burger-constructor"
 import { useAppDispatch, useAppSelector, useModal } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients"
 import { createOrder } from "../../services/last-order"
+import { IBurgerConstructorIngredientItem, IBurgerIngredientItem } from "../../services/types"
 import DropContainer from "../dnd/drop-container/drop-container"
 import OrderDetails from "../order-details/order-details"
 import styles from "./burger-constructor.module.css"
 import BurgerConstructorItem from "./constructor-item/constructor-item"
 import IngredientPlaceholder from "./ingredient-placeholder/ingredient-placeholder"
+
+function getIngredientForConstructor({
+  ingredients,
+  searchIngredient,
+}: {
+  ingredients: IBurgerIngredientItem[]
+  searchIngredient: IBurgerConstructorIngredientItem
+}) {
+  const ingredient: IBurgerIngredientItem = {
+    ...ingredients.find((ingredient) => ingredient._id === searchIngredient._id)!,
+  }
+  ingredient.uuid = searchIngredient.uuid
+  return ingredient
+}
 
 export default function BurgerConstructor() {
   const dispatch = useAppDispatch()
@@ -19,17 +34,17 @@ export default function BurgerConstructor() {
 
   const bun = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun?._id)
   const burgerIngredients = burgerConstructor.ingredients
-    .map((searchIngredient) => ingredients.find((ingredient) => ingredient._id === searchIngredient._id))
+    .map((searchIngredient) => getIngredientForConstructor({ ingredients, searchIngredient }))
     .filter((ingredient) => ingredient !== undefined)
 
   const totalPrice = useMemo(() => {
-    return (bun ? bun.price * 2 : 0) + burgerIngredients?.reduce((acc, ingredient) => acc + ingredient!.price, 0)
+    return (bun ? bun.price * 2 : 0) + burgerIngredients?.reduce((acc, ingredient) => acc + ingredient!.price!, 0)
   }, [bun, burgerIngredients])
 
   const canSubmitOrder = bun !== undefined && burgerIngredients.length > 0
 
   const handleSubmitOrder = () => {
-    const ids = [bun!._id, ...burgerIngredients.map((ingredient) => ingredient!._id), bun!._id]
+    const ids = [bun!._id!, ...burgerIngredients.map((ingredient) => ingredient!._id!), bun!._id!]
     dispatch(createOrder(ids))
     openModal()
   }
@@ -67,7 +82,7 @@ export default function BurgerConstructor() {
               ingredientType="middle_ingredient_filled"
               constructorIngredientIndex={index}
               dropType="middle_ingredient_filled"
-              key={index}
+              key={ingredient.uuid}
             >
               <DropContainer
                 ingredientType="middle_ingredient_filled"
