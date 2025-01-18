@@ -1,6 +1,6 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useRef, useState } from "react"
-import { useAppDispatch, useAppSelector } from "../../services/hooks"
+import { useAppDispatch, useAppSelector, useModal } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients"
 import {
   cleanupSelectedIngredient,
@@ -22,7 +22,8 @@ const groups: IBurgerIngredientGroup[] = [
 
 export default function BurgerIngredients() {
   const [currentGroupIndex, setCurrentGroupIndex] = useState(0)
-  const [isVisibleIngredientDetails, setIsVisibleIngredientDetails] = useState(false)
+  const { isModalOpen: isVisibleIngredientDetails, openModal, closeModal } = useModal()
+
   const ingredients = useAppSelector(selectIngredients)
   const selectedIngredient = useAppSelector(selectSelectedIngredient)
   const dispatch = useAppDispatch()
@@ -37,11 +38,11 @@ export default function BurgerIngredients() {
 
   const handleClickIngredient = (ingredient: IBurgerIngredientItem) => {
     dispatch(setSelectedIngredient(ingredient))
-    setIsVisibleIngredientDetails(true)
+    openModal()
   }
 
   const handleCloseDetails = () => {
-    setIsVisibleIngredientDetails(false)
+    closeModal()
     dispatch(cleanupSelectedIngredient())
   }
 

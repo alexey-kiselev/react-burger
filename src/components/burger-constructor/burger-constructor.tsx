@@ -1,7 +1,7 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import { selectBurgerConstructor } from "../../services/burger-constructor"
-import { useAppDispatch, useAppSelector } from "../../services/hooks"
+import { useAppDispatch, useAppSelector, useModal } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients"
 import { createOrder } from "../../services/last-order"
 import DropContainer from "../dnd/drop-container/drop-container"
@@ -15,7 +15,7 @@ export default function BurgerConstructor() {
 
   const burgerConstructor = useAppSelector(selectBurgerConstructor)
   const ingredients = useAppSelector(selectIngredients)
-  const [isVisibleOrderDetails, setIsVisibleOrderDetails] = useState(false)
+  const { isModalOpen: isVisibleOrderDetails, openModal, closeModal } = useModal()
 
   const bun = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun?._id)
   const burgerIngredients = burgerConstructor.ingredients
@@ -31,11 +31,11 @@ export default function BurgerConstructor() {
   const handleSubmitOrder = () => {
     const ids = [bun!._id, ...burgerIngredients.map((ingredient) => ingredient!._id), bun!._id]
     dispatch(createOrder(ids))
-    setIsVisibleOrderDetails(true)
+    openModal()
   }
 
   const handleCloseOrderDetails = () => {
-    setIsVisibleOrderDetails(false)
+    closeModal()
   }
 
   return (
