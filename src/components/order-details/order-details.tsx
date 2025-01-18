@@ -19,7 +19,7 @@ export default function OrderDetails({ onClose }: { onClose: CallbackFunction })
           <>
             <p className={styles.order_number}>{state.order?.order.number}</p>
             <p className={styles.text_order_number}>идентификатор заказа</p>
-            <img className={styles.image_order_is_submitted} src={image_order_is_submitted} />
+            <img className={styles.image_order_is_submitted} src={image_order_is_submitted} alt="Успешный заказ" />
             <p className={styles.text_order_info_main}>Ваш заказ начали готовить</p>
             <p className={styles.text_order_info_additional}>Дождитесь готовности на орбитальной станции</p>
           </>

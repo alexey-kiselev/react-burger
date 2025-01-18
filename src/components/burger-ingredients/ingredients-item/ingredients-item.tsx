@@ -27,7 +27,7 @@ export default function BurgerIngredientsItem({
       className={styles.component}
       onClick={() => onClickIngredient(ingredient)}
     >
-      <img className={styles.image} src={ingredient.image} />
+      <img className={styles.image} src={ingredient.image} alt={ingredient.name} />
       <div className={styles.price_line}>
         <span className={styles.price_number}>{ingredient.price}</span>
         <CurrencyIcon className={styles.price_currency} type="primary" />

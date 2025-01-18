@@ -4,7 +4,7 @@ import styles from "./ingredient-details.module.css"
 export function IngredientDetails({ ingredient }: { ingredient: IBurgerIngredientItem }) {
   return (
     <div className={styles.ingredient_details}>
-      <img className={styles.ingredient_image} src={ingredient.image} />
+      <img className={styles.ingredient_image} src={ingredient.image} alt={ingredient.name} />
       <p className={styles.ingredient_name}>{ingredient.name}</p>
       <div className={styles.nutritionals}>
         <div className={styles.nutritional_block}>
