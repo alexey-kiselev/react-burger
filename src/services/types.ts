@@ -21,3 +21,8 @@ export interface IBurgerConstructor {
   bun: { _id: string } | null
   ingredients: { _id: string }[]
 }
+
+export interface IBurgerItemDragItem {
+  ingredient: IBurgerIngredientItem
+  constructorIngredientIndex: number | null
+}

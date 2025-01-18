@@ -4,10 +4,10 @@ import { selectBurgerConstructor } from "../../services/burger-constructor/reduc
 import { useAppDispatch, useAppSelector } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients/reducers"
 import { createOrder } from "../../services/last-order/actions"
+import DropContainer from "../dnd/drop-container/drop-container"
 import OrderDetails from "../order-details/order-details"
 import styles from "./burger-constructor.module.css"
 import BurgerConstructorItem from "./constructor-item/constructor-item"
-import DropContainer from "./drop-container/drop-container"
 import IngredientPlaceholder from "./ingredient-placeholder/ingredient-placeholder"
 
 export default function BurgerConstructor() {
@@ -26,7 +26,7 @@ export default function BurgerConstructor() {
     return (bun ? bun.price * 2 : 0) + burgerIngredients.reduce((total, ingredient) => (total += ingredient.price), 0)
   }, [bun, burgerIngredients])
 
-  const canSubmitOrder = bun !== null && burgerIngredients.length > 0
+  const canSubmitOrder = bun !== undefined && burgerIngredients.length > 0
 
   const handleSubmitOrder = () => {
     const ids = [bun!._id, ...burgerIngredients.map((ingredient) => ingredient._id), bun!._id]
@@ -42,7 +42,7 @@ export default function BurgerConstructor() {
     <div className={styles.burger_constructor}>
       <div className={styles.burger_constructor_bun}>
         {bun ? (
-          <DropContainer ingredientType="bun_top">
+          <DropContainer ingredientType="bun_top" dropType="bun">
             <ConstructorElement
               type="top"
               isLocked={true}
@@ -52,28 +52,39 @@ export default function BurgerConstructor() {
             />
           </DropContainer>
         ) : (
-          <DropContainer ingredientType="bun_top">
+          <DropContainer ingredientType="bun_top" dropType="bun">
             <IngredientPlaceholder ingredientType="bun_top" text="Кинь в меня булкой" />
           </DropContainer>
         )}
       </div>
       <div className={styles.burger_constructor_ingredients}>
-        <DropContainer ingredientType="middle_ingredient_to_top">
+        <DropContainer ingredientType="middle_ingredient_to_top" dropType="middle_ingredient">
           <IngredientPlaceholder ingredientType="middle_ingredient" text="Добавь соус или начинку по вкусу" />
         </DropContainer>
         {burgerIngredients.length > 0 &&
           burgerIngredients.map((ingredient, index) => (
-            <DropContainer ingredientType="middle_ingredient_filled" constructorIngredientIndex={index}>
-              <BurgerConstructorItem ingredient={ingredient!} key={index} constructorIngredientIndex={index} />
+            <DropContainer
+              ingredientType="middle_ingredient_filled"
+              constructorIngredientIndex={index}
+              dropType="middle_ingredient_filled"
+              key={index}
+            >
+              <DropContainer
+                ingredientType="middle_ingredient_filled"
+                constructorIngredientIndex={index}
+                dropType="middle_ingredient"
+              >
+                <BurgerConstructorItem ingredient={ingredient!} constructorIngredientIndex={index} />
+              </DropContainer>
             </DropContainer>
           ))}
-        <DropContainer ingredientType="middle_ingredient_to_bottom">
+        <DropContainer ingredientType="middle_ingredient_to_bottom" dropType="middle_ingredient">
           <IngredientPlaceholder ingredientType="middle_ingredient" text="Добавь соус или начинку по вкусу" />
         </DropContainer>
       </div>
       <div className={styles.burger_constructor_bun}>
         {bun ? (
-          <DropContainer ingredientType="bun_bottom">
+          <DropContainer ingredientType="bun_bottom" dropType="bun">
             <ConstructorElement
               type="bottom"
               isLocked={true}
@@ -83,7 +94,7 @@ export default function BurgerConstructor() {
             />
           </DropContainer>
         ) : (
-          <DropContainer ingredientType="bun_bottom">
+          <DropContainer ingredientType="bun_bottom" dropType="bun">
             <IngredientPlaceholder ingredientType="bun_bottom" text="Кинь в меня булкой" />
           </DropContainer>
         )}

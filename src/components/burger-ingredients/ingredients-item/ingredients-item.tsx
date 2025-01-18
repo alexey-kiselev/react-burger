@@ -1,6 +1,6 @@
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useDrag } from "react-dnd"
-import { IBurgerIngredientItem, TIngredientClickFunction } from "../../../services/types"
+import { IBurgerIngredientItem, IBurgerItemDragItem, TIngredientClickFunction } from "../../../services/types"
 import styles from "./ingredients-item.module.css"
 
 export default function BurgerIngredientsItem({
@@ -14,7 +14,7 @@ export default function BurgerIngredientsItem({
 }) {
   const [{ isDragging }, refDrag] = useDrag({
     type: ingredient.type === "bun" ? "bun" : "middle_ingredient",
-    item: ingredient,
+    item: { ingredient: ingredient, constructorIngredientIndex: null } satisfies IBurgerItemDragItem,
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),

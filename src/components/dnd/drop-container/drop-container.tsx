@@ -3,15 +3,17 @@ import {
   addMiddleIngredientToBottom,
   addMiddleIngredientToTop,
   changeMiddleIngredientByIndex,
+  changeMiddleIngredientsByIndexes,
   setBurgerBun,
 } from "../../../services/burger-constructor/reducers"
 import { useAppDispatch } from "../../../services/hooks"
-import { IBurgerIngredientItem } from "../../../services/types"
+import { IBurgerItemDragItem } from "../../../services/types"
 
 export default function DropContainer({
   ingredientType,
   children,
   constructorIngredientIndex,
+  dropType,
 }: {
   ingredientType:
     | "bun_top"
@@ -21,23 +23,33 @@ export default function DropContainer({
     | "bun_bottom"
   children: React.ReactNode
   constructorIngredientIndex: number | null
+  dropType: "bun" | "middle_ingredient" | "bun_filled" | "middle_ingredient_filled"
 }) {
   const dispatch = useAppDispatch()
 
   const [{ isOver }, refDrop] = useDrop({
-    accept: ingredientType.startsWith("middle_ingredient") ? "middle_ingredient" : "bun",
+    accept: dropType,
     collect: (monitor) => ({
       isOver: monitor.isOver(),
     }),
-    drop: (ingredient: IBurgerIngredientItem) => {
+    drop: (item: IBurgerItemDragItem) => {
       if (ingredientType.startsWith("bun")) {
-        dispatch(setBurgerBun(ingredient))
+        dispatch(setBurgerBun(item.ingredient))
       } else if (ingredientType === "middle_ingredient_to_top") {
-        dispatch(addMiddleIngredientToTop(ingredient))
+        dispatch(addMiddleIngredientToTop(item.ingredient))
       } else if (ingredientType === "middle_ingredient_to_bottom") {
-        dispatch(addMiddleIngredientToBottom(ingredient))
+        dispatch(addMiddleIngredientToBottom(item.ingredient))
       } else if (ingredientType === "middle_ingredient_filled") {
-        dispatch(changeMiddleIngredientByIndex({ ingredient: ingredient, index: constructorIngredientIndex! }))
+        if (item.constructorIngredientIndex === null && constructorIngredientIndex !== null) {
+          dispatch(changeMiddleIngredientByIndex({ ingredient: item.ingredient, index: constructorIngredientIndex }))
+        } else if (item.constructorIngredientIndex !== null && constructorIngredientIndex !== null) {
+          dispatch(
+            changeMiddleIngredientsByIndexes({
+              fromIndex: item.constructorIngredientIndex,
+              toIndex: constructorIngredientIndex,
+            })
+          )
+        }
       }
     },
   })

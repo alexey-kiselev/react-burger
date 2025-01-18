@@ -25,6 +25,12 @@ export const burgerConstructorSlice = createSlice({
     ) {
       state.ingredients[action.payload.index] = action.payload.ingredient
     },
+    changeMiddleIngredientsByIndexes(
+      state: IBurgerConstructor,
+      action: PayloadAction<{ fromIndex: number; toIndex: number }>
+    ) {
+      state.ingredients.splice(action.payload.toIndex, 0, state.ingredients.splice(action.payload.fromIndex, 1)[0])
+    },
     deleteIngredientByIndex(state: IBurgerConstructor, action: PayloadAction<number>) {
       state.ingredients.splice(action.payload, 1)
     },
@@ -40,5 +46,6 @@ export const {
   addMiddleIngredientToBottom,
   deleteIngredientByIndex,
   changeMiddleIngredientByIndex,
+  changeMiddleIngredientsByIndexes,
 } = burgerConstructorSlice.actions
 export const { selectBurgerConstructor } = burgerConstructorSlice.selectors
