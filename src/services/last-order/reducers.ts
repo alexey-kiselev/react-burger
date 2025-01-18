@@ -30,6 +30,7 @@ export const lastOrderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createOrder.pending, (state) => {
+        state.order = null
         state.loading = true
         state.error = null
       })

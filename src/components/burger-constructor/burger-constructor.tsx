@@ -63,7 +63,9 @@ export default function BurgerConstructor() {
         </DropContainer>
         {burgerIngredients.length > 0 &&
           burgerIngredients.map((ingredient, index) => (
-            <BurgerConstructorItem ingredient={ingredient!} key={index} constructorIngredientIndex={index} />
+            <DropContainer ingredientType="middle_ingredient_filled" constructorIngredientIndex={index}>
+              <BurgerConstructorItem ingredient={ingredient!} key={index} constructorIngredientIndex={index} />
+            </DropContainer>
           ))}
         <DropContainer ingredientType="middle_ingredient_to_bottom">
           <IngredientPlaceholder ingredientType="middle_ingredient" text="Добавь соус или начинку по вкусу" />

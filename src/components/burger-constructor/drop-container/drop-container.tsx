@@ -2,6 +2,7 @@ import { useDrop } from "react-dnd"
 import {
   addMiddleIngredientToBottom,
   addMiddleIngredientToTop,
+  changeMiddleIngredientByIndex,
   setBurgerBun,
 } from "../../../services/burger-constructor/reducers"
 import { useAppDispatch } from "../../../services/hooks"
@@ -10,9 +11,16 @@ import { IBurgerIngredientItem } from "../../../services/types"
 export default function DropContainer({
   ingredientType,
   children,
+  constructorIngredientIndex,
 }: {
-  ingredientType: "bun_top" | "middle_ingredient_to_top" | "middle_ingredient_to_bottom" | "bun_bottom"
+  ingredientType:
+    | "bun_top"
+    | "middle_ingredient_to_top"
+    | "middle_ingredient_filled"
+    | "middle_ingredient_to_bottom"
+    | "bun_bottom"
   children: React.ReactNode
+  constructorIngredientIndex: number | null
 }) {
   const dispatch = useAppDispatch()
 
@@ -22,12 +30,14 @@ export default function DropContainer({
       isOver: monitor.isOver(),
     }),
     drop: (ingredient: IBurgerIngredientItem) => {
-      if (ingredient.type === "bun") {
+      if (ingredientType.startsWith("bun")) {
         dispatch(setBurgerBun(ingredient))
       } else if (ingredientType === "middle_ingredient_to_top") {
         dispatch(addMiddleIngredientToTop(ingredient))
       } else if (ingredientType === "middle_ingredient_to_bottom") {
         dispatch(addMiddleIngredientToBottom(ingredient))
+      } else if (ingredientType === "middle_ingredient_filled") {
+        dispatch(changeMiddleIngredientByIndex({ ingredient: ingredient, index: constructorIngredientIndex! }))
       }
     },
   })
@@ -37,4 +47,8 @@ export default function DropContainer({
       {children}
     </div>
   )
+}
+
+DropContainer.defaultProps = {
+  constructorIngredientIndex: null,
 }

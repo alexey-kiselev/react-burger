@@ -19,6 +19,12 @@ export const burgerConstructorSlice = createSlice({
     addMiddleIngredientToBottom(state: IBurgerConstructor, action: PayloadAction<IBurgerIngredientItem>) {
       state.ingredients.push({ _id: action.payload._id })
     },
+    changeMiddleIngredientByIndex(
+      state: IBurgerConstructor,
+      action: PayloadAction<{ ingredient: IBurgerIngredientItem; index: number }>
+    ) {
+      state.ingredients[action.payload.index] = action.payload.ingredient
+    },
     deleteIngredientByIndex(state: IBurgerConstructor, action: PayloadAction<number>) {
       state.ingredients.splice(action.payload, 1)
     },
@@ -28,6 +34,11 @@ export const burgerConstructorSlice = createSlice({
   },
 })
 
-export const { setBurgerBun, addMiddleIngredientToTop, addMiddleIngredientToBottom, deleteIngredientByIndex } =
-  burgerConstructorSlice.actions
+export const {
+  setBurgerBun,
+  addMiddleIngredientToTop,
+  addMiddleIngredientToBottom,
+  deleteIngredientByIndex,
+  changeMiddleIngredientByIndex,
+} = burgerConstructorSlice.actions
 export const { selectBurgerConstructor } = burgerConstructorSlice.selectors
