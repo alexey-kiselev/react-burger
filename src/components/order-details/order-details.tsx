@@ -1,6 +1,6 @@
 import image_order_is_submitted from "../../images/order_is_submitted.png"
 import { useAppSelector } from "../../services/hooks"
-import { selectLastOrderNumber } from "../../services/last-order/reducers"
+import { selectLastOrderNumber } from "../../services/last-order"
 import ModalOverlay from "../modal-overlay/modal-overlay"
 import Modal, { CallbackFunction } from "../modal/modal"
 import styles from "./order-details.module.css"
