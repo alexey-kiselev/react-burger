@@ -1,5 +1,5 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { selectBurgerConstructor } from "../../services/burger-constructor/reducers"
 import { useAppSelector } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients/reducers"
@@ -14,11 +14,16 @@ export default function BurgerConstructor() {
   const ingredients = useAppSelector(selectIngredients)
   const [isVisibleOrderDetails, setIsVisibleOrderDetails] = useState(false)
 
-  const bunTop = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun?._id)
-  const bunBottom = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun?._id)
+  const bun = ingredients.find((ingredient) => ingredient._id === burgerConstructor.bun?._id)
   const burgerIngredients = burgerConstructor.ingredients
     .map((searchIngredient) => ingredients.find((ingredient) => ingredient._id === searchIngredient._id))
     .filter((ingredient) => ingredient !== undefined)
+
+  const totalPrice = useMemo(() => {
+    return (bun ? bun.price * 2 : 0) + burgerIngredients.reduce((total, ingredient) => (total += ingredient.price), 0)
+  }, [bun, burgerIngredients])
+
+  const canSubmitOrder = bun !== null && burgerIngredients.length > 0
 
   const handleSubmitOrder = () => {
     setIsVisibleOrderDetails(true)
@@ -31,15 +36,14 @@ export default function BurgerConstructor() {
   return (
     <div className={styles.burger_constructor}>
       <div className={styles.burger_constructor_bun}>
-        {bunTop ? (
+        {bun ? (
           <DropContainer ingredientType="bun_top">
             <ConstructorElement
               type="top"
               isLocked={true}
-              text={bunTop.name + " (верх)"}
-              price={bunTop.price}
-              thumbnail={bunTop.image}
-              key={"bun_top_" + bunTop._id}
+              text={bun.name + " (верх)"}
+              price={bun.price}
+              thumbnail={bun.image}
             />
           </DropContainer>
         ) : (
@@ -61,15 +65,14 @@ export default function BurgerConstructor() {
         </DropContainer>
       </div>
       <div className={styles.burger_constructor_bun}>
-        {bunBottom ? (
+        {bun ? (
           <DropContainer ingredientType="bun_bottom">
             <ConstructorElement
               type="bottom"
               isLocked={true}
-              text={bunBottom.name + " (низ)"}
-              price={bunBottom.price}
-              thumbnail={bunBottom.image}
-              key={"bun_buttom_" + bunBottom._id}
+              text={bun.name + " (низ)"}
+              price={bun.price}
+              thumbnail={bun.image}
             />
           </DropContainer>
         ) : (
@@ -80,9 +83,16 @@ export default function BurgerConstructor() {
       </div>
       <div className={styles.bottom_line}>
         <p className={styles.total_price}>
-          7562 <CurrencyIcon type="primary" />
+          {totalPrice} <CurrencyIcon type="primary" />
         </p>
-        <Button htmlType="submit" type="primary" size="large" extraClass="ml-10" onClick={handleSubmitOrder}>
+        <Button
+          disabled={!canSubmitOrder}
+          htmlType="submit"
+          type="primary"
+          size="large"
+          extraClass="ml-10"
+          onClick={handleSubmitOrder}
+        >
           Оформить заказ
         </Button>
         {isVisibleOrderDetails && <OrderDetails onClose={handleCloseOrderDetails} />}

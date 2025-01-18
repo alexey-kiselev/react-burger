@@ -1,3 +1,4 @@
+import { nanoid } from "@reduxjs/toolkit"
 import { MutableRefObject } from "react"
 import { selectBurgerConstructor } from "../../../services/burger-constructor/reducers"
 import { useAppSelector } from "../../../services/hooks"
@@ -18,7 +19,7 @@ function getIngredientCountFromConstructor({
   burgerConstructor: IBurgerConstructor
 }) {
   if (ingredient._id === burgerConstructor.bun?._id || ingredient._id === burgerConstructor.bun?._id) {
-    return 1
+    return 2
   }
   return burgerConstructor.ingredients.filter((search) => search._id === ingredient._id).length
 }
@@ -44,7 +45,7 @@ export default function BurgerIngredientsGroup({
           <BurgerIngredientsItem
             ingredient={ingredient}
             count={getIngredientCountFromConstructor({ ingredient, burgerConstructor })}
-            key={ingredient._id}
+            key={nanoid()}
             onClickIngredient={onClickIngredient}
           />
         ))}
