@@ -1,6 +1,12 @@
+import { createAsyncThunk } from "@reduxjs/toolkit"
 import { createSlice } from "@reduxjs/toolkit/react"
-import { IBurgerIngredientItem } from "../types"
-import { getIngredients } from "./actions"
+import { getIngredientsApi } from "../utils/api/ingredients"
+import { IBurgerIngredientItem } from "./types"
+
+export const getIngredients = createAsyncThunk("ingredients/getIngredients", async () => {
+  const response = await getIngredientsApi()
+  return response.data
+})
 
 export interface IIngredientsState {
   ingredients: IBurgerIngredientItem[]

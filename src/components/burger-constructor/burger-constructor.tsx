@@ -2,7 +2,7 @@ import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-de
 import { useMemo, useState } from "react"
 import { selectBurgerConstructor } from "../../services/burger-constructor"
 import { useAppDispatch, useAppSelector } from "../../services/hooks"
-import { selectIngredients } from "../../services/ingredients/reducers"
+import { selectIngredients } from "../../services/ingredients"
 import { createOrder } from "../../services/last-order"
 import DropContainer from "../dnd/drop-container/drop-container"
 import OrderDetails from "../order-details/order-details"

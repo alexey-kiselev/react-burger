@@ -1,7 +1,7 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../services/hooks"
-import { selectIngredients } from "../../services/ingredients/reducers"
+import { selectIngredients } from "../../services/ingredients"
 import {
   cleanupSelectedIngredient,
   selectSelectedIngredient,
