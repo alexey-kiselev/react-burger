@@ -1,5 +1,5 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components"
-import { deleteIngredientByIndex } from "../../../services/burger-constructor/reducers"
+import { deleteIngredientByIndex } from "../../../services/burger-constructor"
 import { useAppDispatch } from "../../../services/hooks"
 import { IBurgerIngredientItem } from "../../../services/types"
 import DragContainer from "../../dnd/drag-container/drag-container"

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit/react"
-import { IBurgerConstructor, IBurgerIngredientItem } from "../types"
+import { IBurgerConstructor, IBurgerIngredientItem } from "./types"
 
 const initialState: IBurgerConstructor = {
   bun: null,

@@ -1,6 +1,6 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useMemo, useState } from "react"
-import { selectBurgerConstructor } from "../../services/burger-constructor/reducers"
+import { selectBurgerConstructor } from "../../services/burger-constructor"
 import { useAppDispatch, useAppSelector } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients/reducers"
 import { createOrder } from "../../services/last-order/actions"

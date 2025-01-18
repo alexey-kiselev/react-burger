@@ -1,5 +1,5 @@
 import { combineSlices, configureStore } from "@reduxjs/toolkit"
-import { burgerConstructorSlice } from "./burger-constructor/reducers"
+import { burgerConstructorSlice } from "./burger-constructor"
 import { IIngredientsState, ingredientsSlice } from "./ingredients/reducers"
 import { ILastOrderState, lastOrderSlice } from "./last-order/reducers"
 import { ISelectedIngredientState, selectedIngredientSlice } from "./selected-ingredient/reducers"

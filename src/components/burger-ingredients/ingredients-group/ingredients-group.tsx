@@ -1,6 +1,6 @@
 import { nanoid } from "@reduxjs/toolkit"
 import { MutableRefObject } from "react"
-import { selectBurgerConstructor } from "../../../services/burger-constructor/reducers"
+import { selectBurgerConstructor } from "../../../services/burger-constructor"
 import { useAppSelector } from "../../../services/hooks"
 import {
   IBurgerConstructor,

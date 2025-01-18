@@ -5,7 +5,7 @@ import {
   changeMiddleIngredientByIndex,
   changeMiddleIngredientsByIndexes,
   setBurgerBun,
-} from "../../../services/burger-constructor/reducers"
+} from "../../../services/burger-constructor"
 import { useAppDispatch } from "../../../services/hooks"
 import { IBurgerItemDragItem } from "../../../services/types"
 
