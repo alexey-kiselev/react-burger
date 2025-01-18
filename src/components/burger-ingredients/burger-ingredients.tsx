@@ -6,7 +6,7 @@ import {
   cleanupSelectedIngredient,
   selectSelectedIngredient,
   setSelectedIngredient,
-} from "../../services/selected-ingredient/reducers"
+} from "../../services/selected-ingredient"
 import { IBurgerIngredientGroup, IBurgerIngredientItem } from "../../services/types"
 import { IngredientDetails } from "../ingredient-details/ingredient-details"
 import ModalOverlay from "../modal-overlay/modal-overlay"

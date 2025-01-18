@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit/react"
-import { IBurgerIngredientItem } from "../types"
+import { IBurgerIngredientItem } from "./types"
 
 export interface ISelectedIngredientState {
   ingredient: IBurgerIngredientItem | null

@@ -2,7 +2,7 @@ import { combineSlices, configureStore } from "@reduxjs/toolkit"
 import { burgerConstructorSlice } from "./burger-constructor"
 import { IIngredientsState, ingredientsSlice } from "./ingredients"
 import { ILastOrderState, lastOrderSlice } from "./last-order"
-import { ISelectedIngredientState, selectedIngredientSlice } from "./selected-ingredient/reducers"
+import { ISelectedIngredientState, selectedIngredientSlice } from "./selected-ingredient"
 import { IBurgerConstructor } from "./types"
 
 const rootReducer = combineSlices(ingredientsSlice, burgerConstructorSlice, selectedIngredientSlice, lastOrderSlice)
