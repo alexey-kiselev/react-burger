@@ -23,13 +23,13 @@ export default function BurgerConstructor() {
     .filter((ingredient) => ingredient !== undefined)
 
   const totalPrice = useMemo(() => {
-    return (bun ? bun.price * 2 : 0) + burgerIngredients.reduce((total, ingredient) => (total += ingredient.price), 0)
+    return (bun ? bun.price * 2 : 0) + burgerIngredients?.reduce((acc, ingredient) => acc + ingredient!.price, 0)
   }, [bun, burgerIngredients])
 
   const canSubmitOrder = bun !== undefined && burgerIngredients.length > 0
 
   const handleSubmitOrder = () => {
-    const ids = [bun!._id, ...burgerIngredients.map((ingredient) => ingredient._id), bun!._id]
+    const ids = [bun!._id, ...burgerIngredients.map((ingredient) => ingredient!._id), bun!._id]
     dispatch(createOrder(ids))
     setIsVisibleOrderDetails(true)
   }
