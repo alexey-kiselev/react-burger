@@ -1,6 +1,6 @@
 import { API_INGREDIENTS_URL } from "../../constants"
-import { getResponse } from "./common"
+import { request } from "./common"
 
 export const getIngredientsApi = () => {
-  return fetch(API_INGREDIENTS_URL).then(getResponse)
+  return request(API_INGREDIENTS_URL)
 }

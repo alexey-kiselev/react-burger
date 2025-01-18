@@ -1,12 +1,10 @@
 import { API_ORDERS_URL } from "../../constants"
-import { getResponse } from "./common"
+import { request } from "./common"
 
 export const createOrderApi = (ingredientsIDs: string[]) => {
-  const requestBody = { ingredients: ingredientsIDs }
-  const requestOptions = {
+  return request(API_ORDERS_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(requestBody),
-  }
-  return fetch(API_ORDERS_URL, requestOptions).then(getResponse)
+    body: JSON.stringify({ ingredients: ingredientsIDs }),
+  })
 }
