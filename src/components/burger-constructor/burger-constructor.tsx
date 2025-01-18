@@ -1,8 +1,9 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useMemo, useState } from "react"
 import { selectBurgerConstructor } from "../../services/burger-constructor/reducers"
-import { useAppSelector } from "../../services/hooks"
+import { useAppDispatch, useAppSelector } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients/reducers"
+import { createOrder } from "../../services/last-order/actions"
 import OrderDetails from "../order-details/order-details"
 import styles from "./burger-constructor.module.css"
 import BurgerConstructorItem from "./constructor-item/constructor-item"
@@ -10,6 +11,8 @@ import DropContainer from "./drop-container/drop-container"
 import IngredientPlaceholder from "./ingredient-placeholder/ingredient-placeholder"
 
 export default function BurgerConstructor() {
+  const dispatch = useAppDispatch()
+
   const burgerConstructor = useAppSelector(selectBurgerConstructor)
   const ingredients = useAppSelector(selectIngredients)
   const [isVisibleOrderDetails, setIsVisibleOrderDetails] = useState(false)
@@ -26,6 +29,8 @@ export default function BurgerConstructor() {
   const canSubmitOrder = bun !== null && burgerIngredients.length > 0
 
   const handleSubmitOrder = () => {
+    const ids = [bun!._id, ...burgerIngredients.map((ingredient) => ingredient._id), bun!._id]
+    dispatch(createOrder(ids))
     setIsVisibleOrderDetails(true)
   }
 
