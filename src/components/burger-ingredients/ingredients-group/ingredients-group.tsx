@@ -1,4 +1,3 @@
-import { nanoid } from "@reduxjs/toolkit"
 import { MutableRefObject } from "react"
 import { selectBurgerConstructor } from "../../../services/burger-constructor"
 import { useAppSelector } from "../../../services/hooks"
@@ -45,7 +44,7 @@ export default function BurgerIngredientsGroup({
           <BurgerIngredientsItem
             ingredient={ingredient}
             count={getIngredientCountFromConstructor({ ingredient, burgerConstructor })}
-            key={nanoid()}
+            key={ingredient._id}
             onClickIngredient={onClickIngredient}
           />
         ))}
