@@ -15,7 +15,7 @@ export const burgerConstructorSlice = createSlice({
     },
     addMiddleIngredientToTop: {
       reducer: (state: IBurgerConstructor, action: PayloadAction<IBurgerIngredientItem>) => {
-        state.ingredients = [{ _id: action.payload._id, uuid: nanoid() }, ...state.ingredients]
+        state.ingredients = [{ _id: action.payload._id, uuid: action.payload.uuid! }, ...state.ingredients]
       },
       prepare: (ingredient: IBurgerIngredientItem) => {
         const uuid = nanoid()
