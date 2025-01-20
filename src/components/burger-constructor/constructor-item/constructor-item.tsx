@@ -1,17 +1,36 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components"
-import { IBurgerIngredientItem } from "../../burger-ingredients/burger-ingredients"
+import { deleteIngredientByIndex } from "../../../services/burger-constructor"
+import { useAppDispatch } from "../../../services/hooks"
+import { IBurgerIngredientItem } from "../../../services/types"
+import DragContainer from "../../dnd/drag-container/drag-container"
 import styles from "./constructor-item.module.css"
 
-export default function BurgerConstructorItem({ ingredient }: { ingredient: IBurgerIngredientItem }) {
+export default function BurgerConstructorItem({
+  ingredient,
+  constructorIngredientIndex = null,
+}: {
+  ingredient: IBurgerIngredientItem
+  constructorIngredientIndex: number | null
+}) {
+  const dispatch = useAppDispatch()
+
   return (
-    <div className={styles.burger_constructor_item}>
-      <DragIcon type="primary" className={styles.burger_constructor_drag_icon} />
-      <ConstructorElement
-        text={ingredient.name}
-        price={ingredient.price}
-        thumbnail={ingredient.image}
-        key={ingredient._id}
-      />
-    </div>
+    <DragContainer
+      dragType={ingredient.type === "bun" ? "bun_filled" : "middle_ingredient_filled"}
+      ingredient={ingredient}
+      constructorIngredientIndex={constructorIngredientIndex}
+    >
+      <div className={styles.burger_constructor_item}>
+        <DragIcon type="primary" className={styles.burger_constructor_drag_icon} />
+        <ConstructorElement
+          text={ingredient.name}
+          price={ingredient.price}
+          thumbnail={ingredient.image}
+          handleClose={() => {
+            constructorIngredientIndex !== null && dispatch(deleteIngredientByIndex(constructorIngredientIndex))
+          }}
+        />
+      </div>
+    </DragContainer>
   )
 }

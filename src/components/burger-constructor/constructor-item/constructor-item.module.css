@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: stretch;
   align-items: center;
+  cursor: grab;
 }
 
 .burger_constructor_drag_icon {

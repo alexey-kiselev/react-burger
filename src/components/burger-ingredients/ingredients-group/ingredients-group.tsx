@@ -1,5 +1,12 @@
-import { IBurgerConstructor } from "../../burger-constructor/burger-constructor"
-import { IBurgerIngredientGroup, IBurgerIngredientItem, IngredientClickFunction } from "../burger-ingredients"
+import { MutableRefObject } from "react"
+import { selectBurgerConstructor } from "../../../services/burger-constructor"
+import { useAppSelector } from "../../../services/hooks"
+import {
+  IBurgerConstructor,
+  IBurgerIngredientGroup,
+  IBurgerIngredientItem,
+  TIngredientClickFunction,
+} from "../../../services/types"
 import BurgerIngredientsItem from "../ingredients-item/ingredients-item"
 import styles from "./ingredients-group.module.css"
 
@@ -10,25 +17,27 @@ function getIngredientCountFromConstructor({
   ingredient: IBurgerIngredientItem
   burgerConstructor: IBurgerConstructor
 }) {
-  if (ingredient._id === burgerConstructor.bun.top._id || ingredient._id === burgerConstructor.bun.bottom._id) {
-    return 1
+  if (ingredient._id === burgerConstructor.bun?._id || ingredient._id === burgerConstructor.bun?._id) {
+    return 2
   }
   return burgerConstructor.ingredients.filter((search) => search._id === ingredient._id).length
 }
 
 export default function BurgerIngredientsGroup({
+  headerRef,
   group,
   ingredients,
-  burgerConstructor,
   onClickIngredient,
 }: {
+  headerRef: MutableRefObject<HTMLDivElement | null>
   group: IBurgerIngredientGroup
   ingredients: IBurgerIngredientItem[]
-  burgerConstructor: IBurgerConstructor
-  onClickIngredient: IngredientClickFunction
+  onClickIngredient: TIngredientClickFunction
 }) {
+  const burgerConstructor = useAppSelector(selectBurgerConstructor)
+
   return (
-    <div className={styles.component}>
+    <div className={styles.component} ref={headerRef}>
       <h2 className={styles.title}>{group.title}</h2>
       <div className={styles.ingredients}>
         {ingredients.map((ingredient) => (

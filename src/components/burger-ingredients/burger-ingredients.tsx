@@ -1,69 +1,96 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
-import { useState } from "react"
-import { IBurgerConstructor } from "../burger-constructor/burger-constructor"
+import { useRef, useState } from "react"
+import { useAppDispatch, useAppSelector, useModal } from "../../services/hooks"
+import { selectIngredients } from "../../services/ingredients"
+import {
+  cleanupSelectedIngredient,
+  selectSelectedIngredient,
+  setSelectedIngredient,
+} from "../../services/selected-ingredient"
+import { IBurgerIngredientGroup, IBurgerIngredientItem } from "../../services/types"
 import { IngredientDetails } from "../ingredient-details/ingredient-details"
 import ModalOverlay from "../modal-overlay/modal-overlay"
 import Modal from "../modal/modal"
 import styles from "./burger-ingredients.module.css"
 import BurgerIngredientsGroup from "./ingredients-group/ingredients-group"
 
-export type IngredientClickFunction = (ingredient: IBurgerIngredientItem) => void
+const groups: IBurgerIngredientGroup[] = [
+  { title: "Булки", type: "bun" },
+  { title: "Соусы", type: "sauce" },
+  { title: "Начинки", type: "main" },
+]
 
-export interface IBurgerIngredientItem {
-  _id: string
-  type: string
-  name: string
-  price: number
-  image: string
-  calories: number
-  proteins: number
-  fat: number
-  carbohydrates: number
-}
-export interface IBurgerIngredientGroup {
-  type: string
-  title: string
-}
+export default function BurgerIngredients() {
+  const [currentGroupIndex, setCurrentGroupIndex] = useState(0)
+  const { isModalOpen: isVisibleIngredientDetails, openModal, closeModal } = useModal()
 
-export default function BurgerIngredients({
-  ingredients,
-  groups,
-  burgerConstructor,
-}: {
-  ingredients: IBurgerIngredientItem[]
-  groups: IBurgerIngredientGroup[]
-  burgerConstructor: IBurgerConstructor
-}) {
-  const [currentGroup, setCurrentGroup] = useState(groups[0].type)
-  const [isVisibleIngredientDetails, setIsVisibleIngredientDetails] = useState(false)
-  const [selectedIngredient, setSelectedIngredient] = useState<IBurgerIngredientItem>()
+  const ingredients = useAppSelector(selectIngredients)
+  const selectedIngredient = useAppSelector(selectSelectedIngredient)
+  const dispatch = useAppDispatch()
+
+  const refGroupsContainer = useRef<HTMLDivElement | null>(null)
+
+  const groupHeadersRef = [
+    useRef<HTMLDivElement | null>(null),
+    useRef<HTMLDivElement | null>(null),
+    useRef<HTMLDivElement | null>(null),
+  ]
 
   const handleClickIngredient = (ingredient: IBurgerIngredientItem) => {
-    setSelectedIngredient(ingredient)
-    setIsVisibleIngredientDetails(true)
+    dispatch(setSelectedIngredient(ingredient))
+    openModal()
   }
 
   const handleCloseDetails = () => {
-    setIsVisibleIngredientDetails(false)
-    setSelectedIngredient(undefined)
+    closeModal()
+    dispatch(cleanupSelectedIngredient())
+  }
+
+  const onScroll = () => {
+    if (!refGroupsContainer.current) {
+      return
+    }
+    let minimalDistanceToContainerTop = -1
+    let currentHeaderIndex = 0
+    const { top: containerTop } = refGroupsContainer.current.getBoundingClientRect()
+    groupHeadersRef.forEach((headerRef, index) => {
+      if (!headerRef.current) {
+        return
+      }
+      const { top: headerTop } = headerRef.current.getBoundingClientRect()
+      const distanceToContainerTop = Math.abs(headerTop - containerTop)
+      if (distanceToContainerTop < minimalDistanceToContainerTop || minimalDistanceToContainerTop === -1) {
+        minimalDistanceToContainerTop = distanceToContainerTop
+        currentHeaderIndex = index
+      }
+    })
+    setCurrentGroupIndex(currentHeaderIndex)
   }
 
   return (
     <div className={styles.component}>
       <h1 className={styles.title}>Соберите бургер</h1>
       <div className={styles.tabs}>
-        {groups.map((group) => (
-          <Tab value={group.type} active={currentGroup === group.type} onClick={setCurrentGroup} key={group.type}>
+        {groups.map((group, index) => (
+          <Tab
+            value={group.type}
+            active={currentGroupIndex === index}
+            onClick={() => {
+              setCurrentGroupIndex(index)
+              groupHeadersRef[index].current?.scrollIntoView()
+            }}
+            key={group.type}
+          >
             {group.title}
           </Tab>
         ))}
       </div>
-      <div className={styles.groups}>
-        {groups.map((group) => (
+      <div className={styles.groups} onScroll={onScroll} ref={refGroupsContainer}>
+        {groups.map((group, index) => (
           <BurgerIngredientsGroup
+            headerRef={groupHeadersRef[index]}
             group={group}
             ingredients={ingredients.filter((ingredient) => ingredient.type === group.type)}
-            burgerConstructor={burgerConstructor}
             key={group.type}
             onClickIngredient={handleClickIngredient}
           />
