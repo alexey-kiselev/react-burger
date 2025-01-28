@@ -1,6 +1,9 @@
 import { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
+import { ROUTES } from "../../constants"
 import HomePage from "../../pages/home-page/home-page"
+import OrdersPage from "../../pages/orders-page/orders-page"
+import ProfilePage from "../../pages/profile-page/profile-page"
 import { useAppDispatch, useAppSelector } from "../../services/hooks"
 import { getIngredients, selectIngredientsState } from "../../services/ingredients"
 import AppHeader from "../app-header/app-header"
@@ -40,7 +43,9 @@ export default function App() {
         <AppHeader />
       </div>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path={ROUTES.HOME_PAGE} element={<HomePage />} />
+        <Route path={ROUTES.PROFILE_PAGE} element={<ProfilePage />} />
+        <Route path={ROUTES.ORDERS_PAGE} element={<OrdersPage />} />
       </Routes>
     </div>
   )
