@@ -1,0 +1,7 @@
+.content {
+  text-align: center;
+}
+
+.loader {
+  composes: p-5 from global;
+}
