@@ -5,6 +5,7 @@ import HomePage from "../../pages/home-page/home-page"
 import LoginPage from "../../pages/login-page/login-page"
 import OrdersPage from "../../pages/orders-page/orders-page"
 import ProfilePage from "../../pages/profile-page/profile-page"
+import RegisterPage from "../../pages/register-page/register-page"
 import { useAppDispatch, useAppSelector } from "../../services/hooks"
 import { getIngredients, selectIngredientsState } from "../../services/ingredients"
 import AppHeader from "../app-header/app-header"
@@ -46,6 +47,7 @@ export default function App() {
       <Routes>
         <Route path={ROUTES.HOME_PAGE} element={<HomePage />} />
         <Route path={ROUTES.LOGIN_PAGE} element={<LoginPage />} />
+        <Route path={ROUTES.REGISTER_PAGE} element={<RegisterPage />} />
         <Route path={ROUTES.PROFILE_PAGE} element={<ProfilePage />} />
         <Route path={ROUTES.ORDERS_PAGE} element={<OrdersPage />} />
       </Routes>
