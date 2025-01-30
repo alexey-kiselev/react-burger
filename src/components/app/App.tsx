@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 import { ROUTES } from "../../constants"
+import ForgotPasswordPage from "../../pages/forgot-password/forgot-password"
 import HomePage from "../../pages/home-page/home-page"
 import LoginPage from "../../pages/login-page/login-page"
 import OrdersPage from "../../pages/orders-page/orders-page"
@@ -48,6 +49,7 @@ export default function App() {
         <Route path={ROUTES.HOME_PAGE} element={<HomePage />} />
         <Route path={ROUTES.LOGIN_PAGE} element={<LoginPage />} />
         <Route path={ROUTES.REGISTER_PAGE} element={<RegisterPage />} />
+        <Route path={ROUTES.FORGOT_PASSWORD_PAGE} element={<ForgotPasswordPage />} />
         <Route path={ROUTES.PROFILE_PAGE} element={<ProfilePage />} />
         <Route path={ROUTES.ORDERS_PAGE} element={<OrdersPage />} />
       </Routes>

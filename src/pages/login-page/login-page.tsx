@@ -13,12 +13,18 @@ const LoginPage = () => {
       <div className={styles.container}>
         <h1 className={styles.header}>Вход</h1>
         <div className={styles.field_email}>
-          <Input placeholder="E-mail" onChange={(e) => setEmail(e.target.value)} value={email} name="email" />
+          <Input
+            type="email"
+            placeholder="E-mail"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            name="email"
+          />
         </div>
         <div className={styles.field_password}>
           <PasswordInput onChange={(e) => setPassword(e.target.value)} value={password} name="password" />
         </div>
-        <div className={styles.button_login}>
+        <div className={styles.button_submit}>
           <Button htmlType="button" type="primary" size="medium">
             Войти
           </Button>

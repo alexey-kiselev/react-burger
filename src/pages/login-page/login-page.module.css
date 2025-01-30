@@ -24,7 +24,7 @@
   composes: pb-6 from global;
 }
 
-.button_login {
+.button_submit {
   composes: pb-20 from global;
 }
 
