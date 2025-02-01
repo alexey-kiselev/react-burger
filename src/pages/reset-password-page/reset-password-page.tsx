@@ -1,12 +1,20 @@
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ROUTES } from "../../constants"
+import api from "../../utils/api"
 import styles from "./reset-password-page.module.css"
 
 const ResetPasswordPage = () => {
   const [newPassword, setNewPassword] = useState("")
   const [code, setCode] = useState("")
+  const navigate = useNavigate()
+
+  const onSubmit = () => {
+    api.password.reset(newPassword, "").then(() => {
+      navigate(ROUTES.LOGIN_PAGE)
+    })
+  }
 
   return (
     <div className={styles.content}>
@@ -30,7 +38,7 @@ const ResetPasswordPage = () => {
           />
         </div>
         <div className={styles.button_submit}>
-          <Button htmlType="button" type="primary" size="medium">
+          <Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
             Сохранить
           </Button>
         </div>

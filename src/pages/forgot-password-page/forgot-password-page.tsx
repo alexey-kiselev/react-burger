@@ -1,11 +1,19 @@
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ROUTES } from "../../constants"
+import api from "../../utils/api"
 import styles from "./forgot-password-page.module.css"
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("")
+  const navigate = useNavigate()
+
+  const onSubmit = () => {
+    api.password.forgot(email).then(() => {
+      navigate(ROUTES.RESET_PASSWORD_PAGE)
+    })
+  }
 
   return (
     <div className={styles.content}>
@@ -21,7 +29,7 @@ const ForgotPasswordPage = () => {
           />
         </div>
         <div className={styles.button_submit}>
-          <Button htmlType="button" type="primary" size="medium">
+          <Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
             Восстановить
           </Button>
         </div>
