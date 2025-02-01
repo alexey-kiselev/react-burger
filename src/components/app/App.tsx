@@ -4,6 +4,7 @@ import { ROUTES } from "../../constants"
 import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password-page"
 import HomePage from "../../pages/home-page/home-page"
 import LoginPage from "../../pages/login-page/login-page"
+import OrderInfoPage from "../../pages/order-info-page/order-info-pagee"
 import OrdersPage from "../../pages/orders-page/orders-page"
 import ProfilePage from "../../pages/profile-page/profile-page"
 import RegisterPage from "../../pages/register-page/register-page"
@@ -52,8 +53,10 @@ export default function App() {
         <Route path={ROUTES.REGISTER_PAGE} element={<RegisterPage />} />
         <Route path={ROUTES.FORGOT_PASSWORD_PAGE} element={<ForgotPasswordPage />} />
         <Route path={ROUTES.RESET_PASSWORD_PAGE} element={<ResetPasswordPage />} />
-        <Route path={ROUTES.PROFILE_PAGE} element={<ProfilePage />} />
-        <Route path={ROUTES.ORDERS_PAGE} element={<OrdersPage />} />
+        <Route path={ROUTES.PROFILE_PAGE} element={<ProfilePage />}>
+          <Route path={ROUTES.ORDERS_PAGE} element={<OrdersPage />} />
+          <Route path={ROUTES.ORDER_BY_ID_PAGE} element={<OrderInfoPage />} />
+        </Route>
       </Routes>
     </div>
   )

@@ -1,5 +1,5 @@
 .content {
-  composes: pt-10 pb-4 from global;
+  composes: pt-20 pb-4 from global;
   width: 100%;
   overflow: hidden;
 }
@@ -12,9 +12,49 @@
   justify-self: center;
   display: flex;
   flex-direction: row;
-  column-gap: 40px;
+  column-gap: 60px;
 }
 
-.header {
-  composes: text text_type_main-large from global;
+.menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.menu_link {
+  composes: mb-6 text text_type_main-medium from global;
+  text-decoration: none;
+  color: #666782;
+}
+
+.menu_link_active {
+  composes: mb-6 text text_type_main-medium from global;
+  text-decoration: none;
+  color: white;
+}
+
+.description {
+  composes: mt-20 text text_type_main-small from global;
+  color: #666782;
+}
+
+.sub_content {
+}
+
+.field_name {
+  composes: pb-6 from global;
+}
+
+.field_email {
+  composes: pb-6 from global;
+}
+
+.field_password {
+  composes: pb-6 from global;
+}
+
+.button_line {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
 }
