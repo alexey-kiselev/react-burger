@@ -3,6 +3,10 @@ export const API_INGREDIENTS_URL = `${API_BASE_URL}/ingredients`
 export const API_ORDERS_URL = `${API_BASE_URL}/orders`
 export const API_FORGOT_PASSWORD_URL = `${API_BASE_URL}/password-reset`
 export const API_RESET_PASSWORD_URL = `${API_BASE_URL}/password-reset/reset`
+export const API_AUTH_LOGIN_URL = `${API_BASE_URL}/auth/login`
+export const API_AUTH_REGISTER_URL = `${API_BASE_URL}/auth/register`
+export const API_AUTH_LOGINT_URL = `${API_BASE_URL}/auth/logout`
+export const API_AUTH_TOKEN_URL = `${API_BASE_URL}/auth/token`
 
 export const ROUTES = {
   HOME_PAGE: "/",
