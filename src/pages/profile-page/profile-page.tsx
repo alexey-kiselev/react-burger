@@ -2,14 +2,35 @@ import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burg
 import { useState } from "react"
 import { NavLink, useOutlet } from "react-router-dom"
 import { ROUTES } from "../../constants"
-import { useAppDispatch } from "../../services/hooks"
-import { logout } from "../../services/user"
+import { useAppDispatch, useAppSelector } from "../../services/hooks"
+import { getUser, logout, updateUserInfo } from "../../services/user"
 import styles from "./profile-page.module.css"
 
 const ProfileEdit = () => {
-  const [newName, setNewName] = useState("")
-  const [newEmail, setNewEmail] = useState("")
+  const user = useAppSelector(getUser)
+
+  const [newName, setNewName] = useState(user!.name)
+  const [newEmail, setNewEmail] = useState(user!.email)
   const [newPassword, setNewPassword] = useState("")
+
+  const dispatch = useAppDispatch()
+
+  const onSubmit = () => {
+    const newInfo = {
+      name: newName !== user!.name ? newName : user!.name,
+      email: newEmail !== user!.email ? newEmail : user!.email,
+      password: newPassword !== "" ? newPassword : "",
+    }
+    if (newInfo.name || newInfo.email || newInfo.password) {
+      dispatch(updateUserInfo(newInfo))
+    }
+  }
+
+  const onCancel = () => {
+    setNewName(user!.name)
+    setNewEmail(user!.email)
+    setNewPassword("")
+  }
 
   return (
     <>
@@ -42,10 +63,10 @@ const ProfileEdit = () => {
         />
       </div>
       <div className={styles.button_line}>
-        <Button htmlType="button" type="secondary" size="medium">
+        <Button htmlType="button" type="secondary" size="medium" onClick={onCancel}>
           Отмена
         </Button>
-        <Button htmlType="button" type="primary" size="medium">
+        <Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
           Сохранить
         </Button>
       </div>

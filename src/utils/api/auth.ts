@@ -58,3 +58,21 @@ export const authLogoutApi = async (): Promise<void> => {
   localStorage.removeItem("accessToken")
   localStorage.removeItem("refreshToken")
 }
+
+export const authUpdateUser = async ({
+  name,
+  email,
+  password,
+}: {
+  name: string
+  email: string
+  password: string
+}): Promise<IUser> => {
+  const data = await request(API_AUTH_USER_INFO_URL, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json", Authorization: `${localStorage.getItem("accessToken")}` },
+    body: JSON.stringify({ email: email, password: password, name: name }),
+  })
+  const user: IUser = data.user
+  return user
+}

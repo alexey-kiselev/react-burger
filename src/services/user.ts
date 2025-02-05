@@ -16,6 +16,8 @@ export const login = createAsyncThunk("user/login", api.auth.login)
 
 export const logout = createAsyncThunk("user/logout", api.auth.logout)
 
+export const updateUserInfo = createAsyncThunk("user/updateUserInfo", api.auth.updateUserInfo)
+
 export const checkUserAuth = createAsyncThunk("user/checkUserAuth", async (_, { dispatch }) => {
   if (localStorage.getItem("accessToken")) {
     api.auth
@@ -50,6 +52,9 @@ export const userSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state: IUserState) => {
         state.user = null
+      })
+      .addCase(updateUserInfo.fulfilled, (state: IUserState, action: PayloadAction<IUser>) => {
+        state.user = action.payload
       })
   },
 })

@@ -1,4 +1,4 @@
-import { authGetUser, authLoginApi, authLogoutApi, authRegisterApi } from "./auth"
+import { authGetUser, authLoginApi, authLogoutApi, authRegisterApi, authUpdateUser } from "./auth"
 import { getIngredientsApi } from "./ingredients"
 import { createOrderApi } from "./orders"
 import { forgotPasswordApi, resetPasswordApi } from "./password"
@@ -19,6 +19,7 @@ const api = {
     logout: authLogoutApi,
     register: authRegisterApi,
     getUser: authGetUser,
+    updateUserInfo: authUpdateUser,
   },
 }
 

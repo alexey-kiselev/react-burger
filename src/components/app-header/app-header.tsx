@@ -28,7 +28,7 @@ export default function AppHeader() {
           <NavLink to={ROUTES.PROFILE_PAGE}>
             {({ isActive }) => {
               if (user !== null) {
-                return <NavItem title={user.email} Icon={ProfileIcon} active={isActive} />
+                return <NavItem title={user.name} Icon={ProfileIcon} active={isActive} />
               }
               return <NavItem title="Личный кабинет" Icon={ProfileIcon} active={isActive} />
             }}
