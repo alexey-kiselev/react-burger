@@ -9,10 +9,10 @@ export const forgotPasswordApi = (email: string) => {
   })
 }
 
-export const resetPasswordApi = (password: string, token: string) => {
+export const resetPasswordApi = (password: string, code: string) => {
   return request(API_FORGOT_PASSWORD_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ password: password, token: token }),
+    body: JSON.stringify({ password: password, token: code }),
   })
 }

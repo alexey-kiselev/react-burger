@@ -1,4 +1,4 @@
-import { API_AUTH_LOGIN_URL, API_AUTH_REGISTER_URL, API_AUTH_USER_INFO_URL } from "../../constants"
+import { API_AUTH_LOGIN_URL, API_AUTH_LOGOUT_URL, API_AUTH_REGISTER_URL, API_AUTH_USER_INFO_URL } from "../../constants"
 import { IUser } from "../../services/types"
 import { request } from "./common"
 

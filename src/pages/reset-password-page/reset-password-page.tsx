@@ -11,7 +11,7 @@ const ResetPasswordPage = () => {
   const navigate = useNavigate()
 
   const onSubmit = () => {
-    api.password.reset(newPassword, "").then(() => {
+    api.password.reset(newPassword, code).then(() => {
       navigate(ROUTES.LOGIN_PAGE)
     })
   }
