@@ -1,4 +1,4 @@
-import { authRegisterApi } from "./auth"
+import { authGetUser, authLoginApi, authLogoutApi, authRegisterApi } from "./auth"
 import { getIngredientsApi } from "./ingredients"
 import { createOrderApi } from "./orders"
 import { forgotPasswordApi, resetPasswordApi } from "./password"
@@ -15,7 +15,10 @@ const api = {
     reset: resetPasswordApi,
   },
   auth: {
+    login: authLoginApi,
+    logout: authLogoutApi,
     register: authRegisterApi,
+    getUser: authGetUser,
   },
 }
 

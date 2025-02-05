@@ -2,11 +2,19 @@ import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burg
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { ROUTES } from "../../constants"
+import { useAppDispatch } from "../../services/hooks"
+import { login } from "../../services/user"
 import styles from "./login-page.module.css"
 
 const LoginPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+
+  const dispatch = useAppDispatch()
+
+  const onSubmit = () => {
+    dispatch(login({ email: email, password: password }))
+  }
 
   return (
     <div className={styles.content}>
@@ -25,7 +33,7 @@ const LoginPage = () => {
           <PasswordInput onChange={(e) => setPassword(e.target.value)} value={password} name="password" />
         </div>
         <div className={styles.button_submit}>
-          <Button htmlType="button" type="primary" size="medium">
+          <Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
             Войти
           </Button>
         </div>

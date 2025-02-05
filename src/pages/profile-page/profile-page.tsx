@@ -1,7 +1,9 @@
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react"
-import { Link, NavLink, useOutlet } from "react-router-dom"
+import { NavLink, useOutlet } from "react-router-dom"
 import { ROUTES } from "../../constants"
+import { useAppDispatch } from "../../services/hooks"
+import { logout } from "../../services/user"
 import styles from "./profile-page.module.css"
 
 const ProfileEdit = () => {
@@ -53,6 +55,7 @@ const ProfileEdit = () => {
 
 const ProfilePage = () => {
   const outlet = useOutlet()
+  const dispatch = useAppDispatch()
 
   return (
     <div className={styles.content}>
@@ -71,9 +74,9 @@ const ProfilePage = () => {
           >
             История заказок
           </NavLink>
-          <Link to={ROUTES.LOGOUT_PAGE} className={styles.menu_link}>
+          <a className={styles.menu_link} onClick={() => dispatch(logout())}>
             Выход
-          </Link>
+          </a>
           <p className={styles.description}>
             В этом разделе вы можете изменить <br />
             свои персональные данные
