@@ -11,7 +11,7 @@ const ForgotPasswordPage = () => {
 
   const onSubmit = () => {
     api.password.forgot(email).then(() => {
-      navigate(ROUTES.RESET_PASSWORD_PAGE)
+      navigate(ROUTES.RESET_PASSWORD_PAGE, { state: { from: "forgot-password" } })
     })
   }
 

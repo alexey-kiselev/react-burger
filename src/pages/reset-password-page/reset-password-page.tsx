@@ -1,6 +1,6 @@
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components"
-import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { ROUTES } from "../../constants"
 import api from "../../utils/api"
 import styles from "./reset-password-page.module.css"
@@ -9,6 +9,14 @@ const ResetPasswordPage = () => {
   const [newPassword, setNewPassword] = useState("")
   const [code, setCode] = useState("")
   const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.state?.from !== "forgot-password") {
+      navigate(ROUTES.HOME_PAGE)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const onSubmit = () => {
     api.password.reset(newPassword, code).then(() => {
