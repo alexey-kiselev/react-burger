@@ -1,0 +1,18 @@
+.content {
+  composes: p-10 from global;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  composes: text text_type_main-default from global;
+  display: inline-block;
+  text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #4c4cff;
+}

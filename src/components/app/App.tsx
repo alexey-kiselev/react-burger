@@ -4,6 +4,7 @@ import { ROUTES } from "../../constants"
 import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password-page"
 import HomePage from "../../pages/home-page/home-page"
 import LoginPage from "../../pages/login-page/login-page"
+import NotFound404Page from "../../pages/not-found-404-page/not-found-404-page"
 import OrderInfoPage from "../../pages/order-info-page/order-info-pagee"
 import OrdersPage from "../../pages/orders-page/orders-page"
 import ProfilePage from "../../pages/profile-page/profile-page"
@@ -66,6 +67,7 @@ export default function App() {
           <Route path={ROUTES.ORDERS_PAGE} element={<OrdersPage />} />
           <Route path={ROUTES.ORDER_BY_ID_PAGE} element={<OrderInfoPage />} />
         </Route>
+        <Route path="*" element={<NotFound404Page />} />
       </Routes>
       {background && (
         <Routes>
