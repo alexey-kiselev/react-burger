@@ -10,3 +10,9 @@
   width: 100%;
   height: 100%;
 }
+
+.ingredient_container {
+  composes: mt-20 from global;
+  display: flex;
+  justify-content: center;
+}

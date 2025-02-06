@@ -1,21 +1,15 @@
-import { useEffect } from "react"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor"
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients"
 import Loader from "../../components/loader/loader"
 import OneMessagePage from "../../components/one-message-page/one-message-page"
-import { useAppDispatch, useAppSelector } from "../../services/hooks"
-import { getIngredients, selectIngredientsState } from "../../services/ingredients"
+import { useAppSelector } from "../../services/hooks"
+import { selectIngredientsState } from "../../services/ingredients"
 import styles from "./home-page.module.css"
 
 const HomePage = () => {
   const { loading, error } = useAppSelector(selectIngredientsState)
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch])
 
   if (loading) {
     return (

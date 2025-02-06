@@ -1,12 +1,7 @@
 import { MutableRefObject } from "react"
 import { selectBurgerConstructor } from "../../../services/burger-constructor"
 import { useAppSelector } from "../../../services/hooks"
-import {
-  IBurgerConstructor,
-  IBurgerIngredientGroup,
-  IBurgerIngredientItem,
-  TIngredientClickFunction,
-} from "../../../services/types"
+import { IBurgerConstructor, IBurgerIngredientGroup, IBurgerIngredientItem } from "../../../services/types"
 import BurgerIngredientsItem from "../ingredients-item/ingredients-item"
 import styles from "./ingredients-group.module.css"
 
@@ -27,12 +22,10 @@ export default function BurgerIngredientsGroup({
   headerRef,
   group,
   ingredients,
-  onClickIngredient,
 }: {
   headerRef: MutableRefObject<HTMLDivElement | null>
   group: IBurgerIngredientGroup
   ingredients: IBurgerIngredientItem[]
-  onClickIngredient: TIngredientClickFunction
 }) {
   const burgerConstructor = useAppSelector(selectBurgerConstructor)
 
@@ -45,7 +38,6 @@ export default function BurgerIngredientsGroup({
             ingredient={ingredient}
             count={getIngredientCountFromConstructor({ ingredient, burgerConstructor })}
             key={ingredient._id}
-            onClickIngredient={onClickIngredient}
           />
         ))}
       </div>
