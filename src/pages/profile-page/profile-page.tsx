@@ -16,7 +16,8 @@ const ProfileEdit = () => {
 
   const dispatch = useAppDispatch()
 
-  const onSubmit = () => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     const newInfo = {
       name: newName !== user!.name ? newName : user!.name,
       email: newEmail !== user!.email ? newEmail : user!.email,
@@ -41,7 +42,7 @@ const ProfileEdit = () => {
   }
 
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <div className={styles.field_name}>
         <Input
           type="text"
@@ -83,11 +84,11 @@ const ProfileEdit = () => {
         <Button htmlType="button" type="secondary" size="medium" onClick={onCancel}>
           Отмена
         </Button>
-        <Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
+        <Button htmlType="submit" type="primary" size="medium">
           Сохранить
         </Button>
       </div>
-    </>
+    </form>
   )
 }
 

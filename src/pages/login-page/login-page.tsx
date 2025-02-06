@@ -12,7 +12,8 @@ const LoginPage = () => {
 
   const dispatch = useAppDispatch()
 
-  const onSubmit = () => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     dispatch(login({ email: email, password: password }))
   }
 
@@ -20,6 +21,7 @@ const LoginPage = () => {
     <div className={styles.content}>
       <div className={styles.container}>
         <h1 className={styles.header}>Вход</h1>
+        <form onSubmit={onSubmit}>
         <div className={styles.field_email}>
           <Input
             type="email"
@@ -33,10 +35,11 @@ const LoginPage = () => {
           <PasswordInput onChange={(e) => setPassword(e.target.value)} value={password} name="password" />
         </div>
         <div className={styles.button_submit}>
-          <Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
+            <Button htmlType="submit" type="primary" size="medium">
             Войти
           </Button>
         </div>
+        </form>
         <p>
           Вы – новый пользователь?{" "}
           <Link to={ROUTES.REGISTER_PAGE} className={styles.link}>

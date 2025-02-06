@@ -9,7 +9,8 @@ const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("")
   const navigate = useNavigate()
 
-  const onSubmit = () => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     api.password.forgot(email).then(() => {
       navigate(ROUTES.RESET_PASSWORD_PAGE, { state: { from: "forgot-password" } })
     })
@@ -19,6 +20,7 @@ const ForgotPasswordPage = () => {
     <div className={styles.content}>
       <div className={styles.container}>
         <h1 className={styles.header}>Восстановление пароля</h1>
+        <form onSubmit={onSubmit}>
         <div className={styles.field_email}>
           <Input
             type="email"
@@ -29,10 +31,11 @@ const ForgotPasswordPage = () => {
           />
         </div>
         <div className={styles.button_submit}>
-          <Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
+            <Button htmlType="submit" type="primary" size="medium">
             Восстановить
           </Button>
         </div>
+        </form>
         <p>
           Вспомнили пароль?{" "}
           <Link to={ROUTES.LOGIN_PAGE} className={styles.link}>
