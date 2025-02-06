@@ -2,7 +2,7 @@ import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-de
 import { useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { ROUTES } from "../../constants"
-import { selectBurgerConstructor } from "../../services/burger-constructor"
+import { cleanupConstructor, selectBurgerConstructor } from "../../services/burger-constructor"
 import { useAppDispatch, useAppSelector, useModal } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients"
 import { createOrder } from "../../services/last-order"
@@ -59,6 +59,7 @@ export default function BurgerConstructor() {
   }
 
   const handleCloseOrderDetails = () => {
+    dispatch(cleanupConstructor())
     closeModal()
   }
 
