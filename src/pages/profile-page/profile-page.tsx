@@ -1,5 +1,5 @@
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { NavLink, useOutlet } from "react-router-dom"
 import { ROUTES } from "../../constants"
 import { useAppDispatch, useAppSelector } from "../../services/hooks"
@@ -8,6 +8,7 @@ import styles from "./profile-page.module.css"
 
 const ProfileEdit = () => {
   const user = useAppSelector(getUser)
+  const refButtonsLine = useRef(null)
 
   const [newName, setNewName] = useState(user!.name)
   const [newEmail, setNewEmail] = useState(user!.email)
@@ -30,6 +31,13 @@ const ProfileEdit = () => {
     setNewName(user!.name)
     setNewEmail(user!.email)
     setNewPassword("")
+    const buttonsLine: HTMLDivElement = refButtonsLine.current!
+    buttonsLine.style.visibility = "hidden"
+  }
+
+  const showButtonsLine = () => {
+    const buttonsLine: HTMLDivElement = refButtonsLine.current!
+    buttonsLine.style.visibility = "visible"
   }
 
   return (
@@ -38,7 +46,10 @@ const ProfileEdit = () => {
         <Input
           type="text"
           placeholder="Имя"
-          onChange={(e) => setNewName(e.target.value)}
+          onChange={(e) => {
+            setNewName(e.target.value)
+            showButtonsLine()
+          }}
           value={newName}
           name="newName"
           icon="EditIcon"
@@ -48,7 +59,10 @@ const ProfileEdit = () => {
         <Input
           type="email"
           placeholder="Логин (E-mail)"
-          onChange={(e) => setNewEmail(e.target.value)}
+          onChange={(e) => {
+            setNewEmail(e.target.value)
+            showButtonsLine()
+          }}
           value={newEmail}
           name="newEmail"
           icon="EditIcon"
@@ -56,13 +70,16 @@ const ProfileEdit = () => {
       </div>
       <div className={styles.field_password}>
         <PasswordInput
-          onChange={(e) => setNewPassword(e.target.value)}
+          onChange={(e) => {
+            setNewPassword(e.target.value)
+            showButtonsLine()
+          }}
           value={newPassword}
           name="newPassword"
           icon="EditIcon"
         />
       </div>
-      <div className={styles.button_line}>
+      <div ref={refButtonsLine} className={styles.buttons_line}>
         <Button htmlType="button" type="secondary" size="medium" onClick={onCancel}>
           Отмена
         </Button>

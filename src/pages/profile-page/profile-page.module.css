@@ -54,8 +54,9 @@
   composes: pb-6 from global;
 }
 
-.button_line {
+.buttons_line {
   display: flex;
+  visibility: hidden;
   flex-direction: row;
   justify-content: right;
 }
