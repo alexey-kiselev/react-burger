@@ -4,10 +4,18 @@ import { IIngredientsState, ingredientsSlice } from "./ingredients"
 import { ILastOrderState, lastOrderSlice } from "./last-order"
 import { ISelectedIngredientState, selectedIngredientSlice } from "./selected-ingredient"
 import { IBurgerConstructor } from "./types"
+import { IUserState, userSlice } from "./user"
 
-const rootReducer = combineSlices(ingredientsSlice, burgerConstructorSlice, selectedIngredientSlice, lastOrderSlice)
+const rootReducer = combineSlices(
+  userSlice,
+  ingredientsSlice,
+  burgerConstructorSlice,
+  selectedIngredientSlice,
+  lastOrderSlice
+)
 
 export interface IStoreState {
+  user: IUserState
   ingredients: IIngredientsState
   burgerConstructor: IBurgerConstructor
   selectedIngredient: ISelectedIngredientState

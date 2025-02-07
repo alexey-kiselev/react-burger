@@ -1,44 +1,89 @@
 import { useEffect } from "react"
-import { DndProvider } from "react-dnd"
-import { HTML5Backend } from "react-dnd-html5-backend"
-import { useAppDispatch, useAppSelector } from "../../services/hooks"
-import { getIngredients, selectIngredientsState } from "../../services/ingredients"
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
+import { ROUTES } from "../../constants"
+import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password-page"
+import HomePage from "../../pages/home-page/home-page"
+import LoginPage from "../../pages/login-page/login-page"
+import NotFound404Page from "../../pages/not-found-404-page/not-found-404-page"
+import OrderInfoPage from "../../pages/order-info-page/order-info-pagee"
+import OrdersPage from "../../pages/orders-page/orders-page"
+import ProfilePage from "../../pages/profile-page/profile-page"
+import RegisterPage from "../../pages/register-page/register-page"
+import ResetPasswordPage from "../../pages/reset-password-page/reset-password-page"
+import { useAppDispatch } from "../../services/hooks"
+import { getIngredients } from "../../services/ingredients"
+import { cleanupSelectedIngredient } from "../../services/selected-ingredient"
+import { checkUserAuth } from "../../services/user"
 import AppHeader from "../app-header/app-header"
-import BurgerConstructor from "../burger-constructor/burger-constructor"
-import BurgerIngredients from "../burger-ingredients/burger-ingredients"
-import OneMessagePage from "../one-message-page/one-message-page"
+import { IngredientDetails } from "../ingredient-details/ingredient-details"
+import ModalOverlay from "../modal-overlay/modal-overlay"
+import Modal from "../modal/modal"
+import { ProtectedRouteOnlyAuth, ProtectedRouteOnlyUnAuth } from "../protected-route/protected-route"
 import "./App.css"
 import styles from "./App.module.css"
 
 export default function App() {
-  const { loading, error } = useAppSelector(selectIngredientsState)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const background = location.state && location.state.background
   const dispatch = useAppDispatch()
 
+  const handleModalClose = () => {
+    dispatch(cleanupSelectedIngredient())
+    navigate(-1)
+  }
+
   useEffect(() => {
+    dispatch(checkUserAuth())
     dispatch(getIngredients())
   }, [dispatch])
 
-  if (loading) return <OneMessagePage message="Идёт загрузка, обождите..." />
-
-  if (error) return <OneMessagePage message="Что-то пошло не так :(" />
-
   return (
     <div className={styles.app}>
-      <DndProvider backend={HTML5Backend}>
-        <div className={styles.header}>
-          <AppHeader />
-        </div>
-        <div className={styles.content}>
-          <div className={styles.container}>
-            <div className={styles.content_burger_ingredients}>
-              <BurgerIngredients />
+      <div className={styles.header}>
+        <AppHeader />
+      </div>
+      <Routes location={background || location}>
+        <Route path={ROUTES.HOME_PAGE} element={<HomePage />} />
+        <Route path={ROUTES.LOGIN_PAGE} element={<ProtectedRouteOnlyUnAuth component={<LoginPage />} />} />
+        <Route path={ROUTES.REGISTER_PAGE} element={<ProtectedRouteOnlyUnAuth component={<RegisterPage />} />} />
+        <Route
+          path={ROUTES.INGREDIENT_BY_ID_PAGE}
+          element={
+            <div className={styles.ingredient_container}>
+              <IngredientDetails />
             </div>
-            <div className={styles.content_burger_constructor}>
-              <BurgerConstructor />
-            </div>
-          </div>
-        </div>
-      </DndProvider>
+          }
+        />
+        <Route
+          path={ROUTES.FORGOT_PASSWORD_PAGE}
+          element={<ProtectedRouteOnlyUnAuth component={<ForgotPasswordPage />} />}
+        />
+        <Route
+          path={ROUTES.RESET_PASSWORD_PAGE}
+          element={<ProtectedRouteOnlyUnAuth component={<ResetPasswordPage />} />}
+        />
+        <Route path={ROUTES.PROFILE_PAGE} element={<ProtectedRouteOnlyAuth component={<ProfilePage />} />}>
+          <Route path={ROUTES.ORDERS_PAGE} element={<OrdersPage />} />
+          <Route path={ROUTES.ORDER_BY_ID_PAGE} element={<OrderInfoPage />} />
+        </Route>
+        <Route path="*" element={<NotFound404Page />} />
+      </Routes>
+      {background && (
+        <Routes>
+          <Route
+            path={ROUTES.INGREDIENT_BY_ID_PAGE}
+            element={
+              <>
+                <Modal title="Детали ингредиента" onClose={handleModalClose}>
+                  <IngredientDetails />
+                </Modal>
+                <ModalOverlay />
+              </>
+            }
+          />
+        </Routes>
+      )}
     </div>
   )
 }

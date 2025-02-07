@@ -5,9 +5,9 @@ export interface ISelectedIngredientState {
   ingredient: IBurgerIngredientItem | null
 }
 
-const initialState = {
+const initialState: ISelectedIngredientState = {
   ingredient: null,
-} satisfies ISelectedIngredientState
+}
 
 export const selectedIngredientSlice = createSlice({
   name: "selectedIngredient",

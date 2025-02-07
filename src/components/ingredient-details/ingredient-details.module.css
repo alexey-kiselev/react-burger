@@ -3,6 +3,10 @@
   flex-direction: column;
 }
 
+.ingredient_image_container {
+  width: 100%;
+}
+
 .ingredient_image {
   height: 200px;
   justify-self: center;

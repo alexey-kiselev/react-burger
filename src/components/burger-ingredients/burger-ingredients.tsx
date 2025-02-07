@@ -1,16 +1,8 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useRef, useState } from "react"
-import { useAppDispatch, useAppSelector, useModal } from "../../services/hooks"
+import { useAppSelector } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients"
-import {
-  cleanupSelectedIngredient,
-  selectSelectedIngredient,
-  setSelectedIngredient,
-} from "../../services/selected-ingredient"
-import { IBurgerIngredientGroup, IBurgerIngredientItem } from "../../services/types"
-import { IngredientDetails } from "../ingredient-details/ingredient-details"
-import ModalOverlay from "../modal-overlay/modal-overlay"
-import Modal from "../modal/modal"
+import { IBurgerIngredientGroup } from "../../services/types"
 import styles from "./burger-ingredients.module.css"
 import BurgerIngredientsGroup from "./ingredients-group/ingredients-group"
 
@@ -22,11 +14,8 @@ const groups: IBurgerIngredientGroup[] = [
 
 export default function BurgerIngredients() {
   const [currentGroupIndex, setCurrentGroupIndex] = useState(0)
-  const { isModalOpen: isVisibleIngredientDetails, openModal, closeModal } = useModal()
 
   const ingredients = useAppSelector(selectIngredients)
-  const selectedIngredient = useAppSelector(selectSelectedIngredient)
-  const dispatch = useAppDispatch()
 
   const refGroupsContainer = useRef<HTMLDivElement | null>(null)
 
@@ -35,16 +24,6 @@ export default function BurgerIngredients() {
     useRef<HTMLDivElement | null>(null),
     useRef<HTMLDivElement | null>(null),
   ]
-
-  const handleClickIngredient = (ingredient: IBurgerIngredientItem) => {
-    dispatch(setSelectedIngredient(ingredient))
-    openModal()
-  }
-
-  const handleCloseDetails = () => {
-    closeModal()
-    dispatch(cleanupSelectedIngredient())
-  }
 
   const onScroll = () => {
     if (!refGroupsContainer.current) {
@@ -92,18 +71,9 @@ export default function BurgerIngredients() {
             group={group}
             ingredients={ingredients.filter((ingredient) => ingredient.type === group.type)}
             key={group.type}
-            onClickIngredient={handleClickIngredient}
           />
         ))}
       </div>
-      {isVisibleIngredientDetails && (
-        <>
-          <Modal title="Детали ингредиента" onClose={handleCloseDetails}>
-            <IngredientDetails ingredient={selectedIngredient!} />
-          </Modal>
-          <ModalOverlay />
-        </>
-      )}
     </div>
   )
 }

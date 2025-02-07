@@ -6,7 +6,3 @@
   height: 100vh;
   width: 100%;
 }
-
-.message {
-  composes: text text_type_main-large from global;
-}

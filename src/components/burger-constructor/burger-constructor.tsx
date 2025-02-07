@@ -1,10 +1,13 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useMemo } from "react"
-import { selectBurgerConstructor } from "../../services/burger-constructor"
+import { useNavigate } from "react-router-dom"
+import { ROUTES } from "../../constants"
+import { cleanupConstructor, selectBurgerConstructor } from "../../services/burger-constructor"
 import { useAppDispatch, useAppSelector, useModal } from "../../services/hooks"
 import { selectIngredients } from "../../services/ingredients"
 import { createOrder } from "../../services/last-order"
 import { IBurgerConstructorIngredientItem, IBurgerIngredientItem } from "../../services/types"
+import { getUser } from "../../services/user"
 import DropContainer from "../dnd/drop-container/drop-container"
 import OrderDetails from "../order-details/order-details"
 import styles from "./burger-constructor.module.css"
@@ -26,7 +29,9 @@ function getIngredientForConstructor({
 }
 
 export default function BurgerConstructor() {
+  const user = useAppSelector(getUser)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const burgerConstructor = useAppSelector(selectBurgerConstructor)
   const ingredients = useAppSelector(selectIngredients)
@@ -44,12 +49,17 @@ export default function BurgerConstructor() {
   const canSubmitOrder = bun !== undefined && burgerIngredients.length > 0
 
   const handleSubmitOrder = () => {
-    const ids = [bun!._id!, ...burgerIngredients.map((ingredient) => ingredient!._id!), bun!._id!]
-    dispatch(createOrder(ids))
-    openModal()
+    if (user) {
+      const ids = [bun!._id!, ...burgerIngredients.map((ingredient) => ingredient!._id!), bun!._id!]
+      dispatch(createOrder(ids))
+      openModal()
+    } else {
+      navigate(ROUTES.LOGIN_PAGE)
+    }
   }
 
   const handleCloseOrderDetails = () => {
+    dispatch(cleanupConstructor())
     closeModal()
   }
 

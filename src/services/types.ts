@@ -1,3 +1,8 @@
+export interface IUser {
+  email: string
+  name: string
+}
+
 export interface IBurgerIngredientItem {
   _id: string
   type: string

@@ -1,6 +1,7 @@
 import image_order_is_submitted from "../../images/order_is_submitted.png"
 import { useAppSelector } from "../../services/hooks"
 import { selectLastOrderState } from "../../services/last-order"
+import Loader from "../loader/loader"
 import ModalOverlay from "../modal-overlay/modal-overlay"
 import Modal, { CallbackFunction } from "../modal/modal"
 import styles from "./order-details.module.css"
@@ -12,7 +13,9 @@ export default function OrderDetails({ onClose }: { onClose: CallbackFunction })
     <div className={styles.order_datails}>
       <Modal onClose={onClose}>
         {state.loading ? (
-          <p className={styles.text_order_info_main}>Оформляем заказ..</p>
+          <Loader>
+            <p className="text text_type_main-large">Оформляем заказ...</p>
+          </Loader>
         ) : state.error ? (
           <p className={styles.text_order_info_main}>Что-то пошло не так :(</p>
         ) : (

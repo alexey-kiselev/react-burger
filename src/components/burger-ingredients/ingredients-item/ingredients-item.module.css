@@ -35,3 +35,8 @@
   top: 0px;
   right: 0px;
 }
+
+.link {
+  color: inherit;
+  text-decoration: inherit;
+}

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { createSlice } from "@reduxjs/toolkit/react"
-import { createOrderApi } from "../utils/api/orders"
+import api from "../utils/api"
 
-export const createOrder = createAsyncThunk("order/createOrder", createOrderApi)
+export const createOrder = createAsyncThunk("order/createOrder", api.orders.createOrder)
 
 export interface ILastOrderState {
   order: {
