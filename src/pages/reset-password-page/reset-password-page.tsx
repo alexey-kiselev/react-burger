@@ -20,7 +20,7 @@ const ResetPasswordPage = () => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    api.password.reset(newPassword, code).then(() => {
+    api.password.reset({ password: newPassword, code }).then(() => {
       navigate(ROUTES.LOGIN_PAGE)
     })
   }

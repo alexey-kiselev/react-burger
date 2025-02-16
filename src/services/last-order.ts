@@ -1,17 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { createSlice } from "@reduxjs/toolkit/react"
 import api from "../utils/api"
+import { IOrder } from "../utils/api/orders"
 
 export const createOrder = createAsyncThunk("order/createOrder", api.orders.createOrder)
 
 export interface ILastOrderState {
-  order: {
-    name: string | null
-    order: {
-      number: number | null
-    }
-    success: boolean | null
-  } | null
+  order: IOrder | null
   loading: boolean
   error: string | null | undefined
 }

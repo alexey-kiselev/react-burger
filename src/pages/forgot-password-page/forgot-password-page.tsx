@@ -11,7 +11,7 @@ const ForgotPasswordPage = () => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    api.password.forgot(email).then(() => {
+    api.password.forgot({ email }).then(() => {
       navigate(ROUTES.RESET_PASSWORD_PAGE, { state: { from: "forgot-password" } })
     })
   }

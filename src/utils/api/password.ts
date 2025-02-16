@@ -1,18 +1,41 @@
 import { API_FORGOT_PASSWORD_URL } from "../../constants"
 import { request } from "./common"
 
-export const forgotPasswordApi = (email: string) => {
-  return request(API_FORGOT_PASSWORD_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email: email }),
-  })
+interface IForgotPasswordApiProps {
+  email: string
 }
 
-export const resetPasswordApi = (password: string, code: string) => {
-  return request(API_FORGOT_PASSWORD_URL, {
+interface IForgotPasswordApiResponse {
+  success: boolean
+  message: string
+}
+
+export async function forgotPasswordApi({ email }: IForgotPasswordApiProps): Promise<IForgotPasswordApiResponse> {
+  const url = API_FORGOT_PASSWORD_URL
+  const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ password: password, token: code }),
-  })
+    body: JSON.stringify({ email }),
+  }
+  return request<IForgotPasswordApiResponse>({ url, options })
+}
+
+interface IResetPasswordApiProps {
+  password: string
+  code: string
+}
+
+interface IResetPasswordApiResponse {
+  success: boolean
+  message: string
+}
+
+export async function resetPasswordApi({ password, code }: IResetPasswordApiProps): Promise<IResetPasswordApiResponse> {
+  const url = API_FORGOT_PASSWORD_URL
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ password, token: code }),
+  }
+  return request<IResetPasswordApiResponse>({ url, options })
 }

@@ -51,7 +51,7 @@ export default function BurgerConstructor() {
   const handleSubmitOrder = () => {
     if (user) {
       const ids = [bun!._id!, ...burgerIngredients.map((ingredient) => ingredient!._id!), bun!._id!]
-      dispatch(createOrder(ids))
+      dispatch(createOrder({ ingredientsIDs: ids }))
       openModal()
     } else {
       navigate(ROUTES.LOGIN_PAGE)
