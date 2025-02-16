@@ -1,4 +1,3 @@
-import React from "react"
 import { Navigate, useLocation } from "react-router-dom"
 import { ROUTES } from "../../constants"
 import { useAppSelector } from "../../services/hooks"
@@ -7,12 +6,12 @@ import Loader from "../loader/loader"
 import OneMessagePage from "../one-message-page/one-message-page"
 import styles from "./protected-route.module.css"
 
-type TProtectedProps = {
+interface IProtectedRouteElementProps {
   onlyUnAuth?: boolean
-  component: React.JSX.Element
+  component: JSX.Element
 }
 
-const ProtectedRouteElement = ({ onlyUnAuth = false, component }: TProtectedProps): React.JSX.Element => {
+const ProtectedRouteElement = ({ onlyUnAuth = false, component }: IProtectedRouteElementProps): JSX.Element => {
   const isAuthChecked = useAppSelector(getIsAuthChecked)
   const user = useAppSelector(getUser)
   const location = useLocation()
@@ -40,6 +39,6 @@ const ProtectedRouteElement = ({ onlyUnAuth = false, component }: TProtectedProp
 }
 
 export const ProtectedRouteOnlyAuth = ProtectedRouteElement
-export const ProtectedRouteOnlyUnAuth = ({ component }: { component: React.JSX.Element }): React.JSX.Element => (
+export const ProtectedRouteOnlyUnAuth = ({ component }: { component: JSX.Element }): JSX.Element => (
   <ProtectedRouteElement onlyUnAuth={true} component={component} />
 )

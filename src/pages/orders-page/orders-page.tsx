@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { ROUTES } from "../../constants"
 import styles from "./orders-page.module.css"
 
-const OrdersPage = () => {
+export default function OrdersPage(): JSX.Element {
   return (
     <>
       <h1 className={styles.header}>История заказов</h1>
@@ -21,5 +21,3 @@ const OrdersPage = () => {
     </>
   )
 }
-
-export default OrdersPage

@@ -5,13 +5,15 @@ import { IBurgerIngredientItem } from "../../../services/types"
 import DragContainer from "../../dnd/drag-container/drag-container"
 import styles from "./constructor-item.module.css"
 
+interface IBurgerConstructorItemProps {
+  ingredient: IBurgerIngredientItem
+  constructorIngredientIndex?: number | null
+}
+
 export default function BurgerConstructorItem({
   ingredient,
   constructorIngredientIndex = null,
-}: {
-  ingredient: IBurgerIngredientItem
-  constructorIngredientIndex: number | null
-}) {
+}: IBurgerConstructorItemProps): JSX.Element {
   const dispatch = useAppDispatch()
 
   return (

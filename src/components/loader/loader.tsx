@@ -1,7 +1,11 @@
 import { motion } from "framer-motion"
 import styles from "./loader.module.css"
 
-const LoadingAnimation = ({ children }: { children: React.ReactNode }) => {
+interface ILoadingAnimationProps {
+  children: React.ReactNode
+}
+
+function LoadingAnimation({ children }: ILoadingAnimationProps): JSX.Element {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       {children}
@@ -9,7 +13,7 @@ const LoadingAnimation = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-const RotatingSquares = () => {
+function RotatingSquares(): JSX.Element {
   return (
     <div style={{ display: "flex", justifyContent: "space-around" }}>
       {[...Array(3)].map((_, index) => (
@@ -32,7 +36,11 @@ const RotatingSquares = () => {
   )
 }
 
-const Loader = ({ children }: { children: React.ReactNode }) => {
+interface ILoaderProps {
+  children: React.ReactNode
+}
+
+export default function Loader({ children }: ILoaderProps): JSX.Element {
   return (
     <LoadingAnimation>
       <div className={styles.content}>{children}</div>
@@ -42,5 +50,3 @@ const Loader = ({ children }: { children: React.ReactNode }) => {
     </LoadingAnimation>
   )
 }
-
-export default Loader

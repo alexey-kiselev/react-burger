@@ -5,28 +5,32 @@ import { IBurgerConstructor, IBurgerIngredientGroup, IBurgerIngredientItem } fro
 import BurgerIngredientsItem from "../ingredients-item/ingredients-item"
 import styles from "./ingredients-group.module.css"
 
+interface IGetIngredientCountFromConstructorProps {
+  ingredient: IBurgerIngredientItem
+  burgerConstructor: IBurgerConstructor
+}
+
 function getIngredientCountFromConstructor({
   ingredient,
   burgerConstructor,
-}: {
-  ingredient: IBurgerIngredientItem
-  burgerConstructor: IBurgerConstructor
-}) {
+}: IGetIngredientCountFromConstructorProps): number {
   if (ingredient._id === burgerConstructor.bun?._id || ingredient._id === burgerConstructor.bun?._id) {
     return 2
   }
   return burgerConstructor.ingredients.filter((search) => search._id === ingredient._id).length
 }
 
+interface IBurgerIngredientsGroupProps {
+  headerRef: MutableRefObject<HTMLDivElement | null>
+  group: IBurgerIngredientGroup
+  ingredients: IBurgerIngredientItem[]
+}
+
 export default function BurgerIngredientsGroup({
   headerRef,
   group,
   ingredients,
-}: {
-  headerRef: MutableRefObject<HTMLDivElement | null>
-  group: IBurgerIngredientGroup
-  ingredients: IBurgerIngredientItem[]
-}) {
+}: IBurgerIngredientsGroupProps): JSX.Element {
   const burgerConstructor = useAppSelector(selectBurgerConstructor)
 
   return (

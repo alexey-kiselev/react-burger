@@ -5,8 +5,8 @@ import { ROUTES } from "../../constants"
 import api from "../../utils/api"
 import styles from "./forgot-password-page.module.css"
 
-const ForgotPasswordPage = () => {
-  const [email, setEmail] = useState("")
+export default function ForgotPasswordPage(): JSX.Element {
+  const [email, setEmail] = useState<string>("")
   const navigate = useNavigate()
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -21,20 +21,20 @@ const ForgotPasswordPage = () => {
       <div className={styles.container}>
         <h1 className={styles.header}>Восстановление пароля</h1>
         <form onSubmit={onSubmit}>
-        <div className={styles.field_email}>
-          <Input
-            type="email"
-            placeholder="Укажите e-mail"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            name="email"
-          />
-        </div>
-        <div className={styles.button_submit}>
+          <div className={styles.field_email}>
+            <Input
+              type="email"
+              placeholder="Укажите e-mail"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              name="email"
+            />
+          </div>
+          <div className={styles.button_submit}>
             <Button htmlType="submit" type="primary" size="medium">
-            Восстановить
-          </Button>
-        </div>
+              Восстановить
+            </Button>
+          </div>
         </form>
         <p>
           Вспомнили пароль?{" "}
@@ -46,5 +46,3 @@ const ForgotPasswordPage = () => {
     </div>
   )
 }
-
-export default ForgotPasswordPage

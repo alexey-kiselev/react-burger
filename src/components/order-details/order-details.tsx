@@ -6,7 +6,11 @@ import ModalOverlay from "../modal-overlay/modal-overlay"
 import Modal, { CallbackFunction } from "../modal/modal"
 import styles from "./order-details.module.css"
 
-export default function OrderDetails({ onClose }: { onClose: CallbackFunction }) {
+interface IOrderDetailsProps {
+  onClose: CallbackFunction
+}
+
+export default function OrderDetails({ onClose }: IOrderDetailsProps): JSX.Element {
   const state = useAppSelector(selectLastOrderState)
 
   return (

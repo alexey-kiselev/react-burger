@@ -7,15 +7,13 @@ export type CallbackFunction = () => void
 
 const modalRoot = document.getElementById("react-modals")!
 
-export default function Modal({
-  title = undefined,
-  children,
-  onClose,
-}: {
+interface IModalProps {
   title?: string
   children: React.ReactNode
   onClose: CallbackFunction
-}) {
+}
+
+export default function Modal({ title = undefined, children, onClose }: IModalProps): JSX.Element {
   const withTitle = typeof title !== "undefined" && title.trim() !== ""
 
   const eventKeydown = (event: KeyboardEvent) => {

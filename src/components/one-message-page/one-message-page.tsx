@@ -1,5 +1,9 @@
 import styles from "./one-message-page.module.css"
 
-export default function OneMessagePage({ children }: { children: React.ReactNode }) {
+interface IOneMessagePageProps {
+  children: React.ReactNode
+}
+
+export default function OneMessagePage({ children }: IOneMessagePageProps): JSX.Element {
   return <div className={styles.container}>{children}</div>
 }

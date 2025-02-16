@@ -14,13 +14,15 @@ import styles from "./burger-constructor.module.css"
 import BurgerConstructorItem from "./constructor-item/constructor-item"
 import IngredientPlaceholder from "./ingredient-placeholder/ingredient-placeholder"
 
+interface IGetIngredientForConstructorProps {
+  ingredients: IBurgerIngredientItem[]
+  searchIngredient: IBurgerConstructorIngredientItem
+}
+
 function getIngredientForConstructor({
   ingredients,
   searchIngredient,
-}: {
-  ingredients: IBurgerIngredientItem[]
-  searchIngredient: IBurgerConstructorIngredientItem
-}) {
+}: IGetIngredientForConstructorProps): IBurgerIngredientItem {
   const ingredient: IBurgerIngredientItem = {
     ...ingredients.find((ingredient) => ingredient._id === searchIngredient._id)!,
   }
@@ -28,7 +30,7 @@ function getIngredientForConstructor({
   return ingredient
 }
 
-export default function BurgerConstructor() {
+export default function BurgerConstructor(): JSX.Element {
   const user = useAppSelector(getUser)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

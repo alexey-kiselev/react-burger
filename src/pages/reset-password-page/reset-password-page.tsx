@@ -5,9 +5,9 @@ import { ROUTES } from "../../constants"
 import api from "../../utils/api"
 import styles from "./reset-password-page.module.css"
 
-const ResetPasswordPage = () => {
-  const [newPassword, setNewPassword] = useState("")
-  const [code, setCode] = useState("")
+export default function ResetPasswordPage(): JSX.Element {
+  const [newPassword, setNewPassword] = useState<string>("")
+  const [code, setCode] = useState<string>("")
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -63,5 +63,3 @@ const ResetPasswordPage = () => {
     </div>
   )
 }
-
-export default ResetPasswordPage
