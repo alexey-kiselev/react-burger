@@ -6,13 +6,13 @@ import { useAppDispatch, useAppSelector } from "../../services/hooks"
 import { getUser, logout, updateUserInfo } from "../../services/user"
 import styles from "./profile-page.module.css"
 
-const ProfileEdit = () => {
+function ProfileEdit(): JSX.Element {
   const user = useAppSelector(getUser)
-  const refButtonsLine = useRef(null)
+  const refButtonsLine = useRef<HTMLDivElement>(null)
 
-  const [newName, setNewName] = useState(user!.name)
-  const [newEmail, setNewEmail] = useState(user!.email)
-  const [newPassword, setNewPassword] = useState("")
+  const [newName, setNewName] = useState<string>(user!.name)
+  const [newEmail, setNewEmail] = useState<string>(user!.email)
+  const [newPassword, setNewPassword] = useState<string>("")
 
   const dispatch = useAppDispatch()
 
@@ -32,13 +32,11 @@ const ProfileEdit = () => {
     setNewName(user!.name)
     setNewEmail(user!.email)
     setNewPassword("")
-    const buttonsLine: HTMLDivElement = refButtonsLine.current!
-    buttonsLine.style.visibility = "hidden"
+    refButtonsLine.current!.style.visibility = "hidden"
   }
 
   const showButtonsLine = () => {
-    const buttonsLine: HTMLDivElement = refButtonsLine.current!
-    buttonsLine.style.visibility = "visible"
+    refButtonsLine.current!.style.visibility = "visible"
   }
 
   return (
@@ -92,7 +90,7 @@ const ProfileEdit = () => {
   )
 }
 
-const ProfilePage = () => {
+export default function ProfilePage(): JSX.Element {
   const outlet = useOutlet()
   const dispatch = useAppDispatch()
 
@@ -126,5 +124,3 @@ const ProfilePage = () => {
     </div>
   )
 }
-
-export default ProfilePage

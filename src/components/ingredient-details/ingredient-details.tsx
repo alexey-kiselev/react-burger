@@ -5,7 +5,7 @@ import { selectIngredients } from "../../services/ingredients"
 import { selectSelectedIngredient, setSelectedIngredient } from "../../services/selected-ingredient"
 import styles from "./ingredient-details.module.css"
 
-export function IngredientDetails() {
+export function IngredientDetails(): JSX.Element {
   const ingredient = useAppSelector(selectSelectedIngredient)
   const ingredients = useAppSelector(selectIngredients)
   const dispatch = useAppDispatch()

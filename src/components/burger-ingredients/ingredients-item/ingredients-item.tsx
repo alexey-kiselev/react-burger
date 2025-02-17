@@ -5,13 +5,12 @@ import { ROUTES } from "../../../constants"
 import { IBurgerIngredientItem, IBurgerItemDragItem } from "../../../services/types"
 import styles from "./ingredients-item.module.css"
 
-export default function BurgerIngredientsItem({
-  ingredient,
-  count,
-}: {
+interface IBurgerIngredientsItemProps {
   ingredient: IBurgerIngredientItem
   count: number
-}) {
+}
+
+export default function BurgerIngredientsItem({ ingredient, count }: IBurgerIngredientsItemProps): JSX.Element {
   const [{ isDragging }, refDrag] = useDrag({
     type: ingredient.type === "bun" ? "bun" : "middle_ingredient",
     item: { ingredient: ingredient, constructorIngredientIndex: null } satisfies IBurgerItemDragItem,

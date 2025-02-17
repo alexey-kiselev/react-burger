@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { ROUTES } from "../../constants"
 import styles from "./not-found-404-page.module.css"
 
-const NotFound404Page = () => {
+export default function NotFound404Page(): JSX.Element {
   return (
     <div className={styles.content}>
       <div className={styles.container}>
@@ -14,5 +14,3 @@ const NotFound404Page = () => {
     </div>
   )
 }
-
-export default NotFound404Page

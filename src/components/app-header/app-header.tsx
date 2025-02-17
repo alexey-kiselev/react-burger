@@ -7,7 +7,7 @@ import styles from "./app-header.module.css"
 import NavItem from "./nav-item/nav-item"
 import NavMenu from "./nav-menu/nav-menu"
 
-export default function AppHeader() {
+export default function AppHeader(): JSX.Element {
   const user = useAppSelector(getUser)
 
   return (

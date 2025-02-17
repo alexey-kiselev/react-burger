@@ -12,12 +12,12 @@ const groups: IBurgerIngredientGroup[] = [
   { title: "Начинки", type: "main" },
 ]
 
-export default function BurgerIngredients() {
-  const [currentGroupIndex, setCurrentGroupIndex] = useState(0)
+export default function BurgerIngredients(): JSX.Element {
+  const [currentGroupIndex, setCurrentGroupIndex] = useState<number>(0)
 
   const ingredients = useAppSelector(selectIngredients)
 
-  const refGroupsContainer = useRef<HTMLDivElement | null>(null)
+  const refGroupsContainer = useRef<HTMLDivElement>(null)
 
   const groupHeadersRef = [
     useRef<HTMLDivElement | null>(null),

@@ -5,10 +5,10 @@ import { ROUTES } from "../../constants"
 import api from "../../utils/api"
 import styles from "./register-page.module.css"
 
-const RegisterPage = () => {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+export default function RegisterPage(): JSX.Element {
+  const [name, setName] = useState<string>("")
+  const [email, setEmail] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
   const navigate = useNavigate()
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -68,5 +68,3 @@ const RegisterPage = () => {
     </div>
   )
 }
-
-export default RegisterPage

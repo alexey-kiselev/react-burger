@@ -5,9 +5,9 @@ import { ROUTES } from "../../constants"
 import api from "../../utils/api"
 import styles from "./reset-password-page.module.css"
 
-const ResetPasswordPage = () => {
-  const [newPassword, setNewPassword] = useState("")
-  const [code, setCode] = useState("")
+export default function ResetPasswordPage(): JSX.Element {
+  const [newPassword, setNewPassword] = useState<string>("")
+  const [code, setCode] = useState<string>("")
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -20,7 +20,7 @@ const ResetPasswordPage = () => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    api.password.reset(newPassword, code).then(() => {
+    api.password.reset({ password: newPassword, code }).then(() => {
       navigate(ROUTES.LOGIN_PAGE)
     })
   }
@@ -63,5 +63,3 @@ const ResetPasswordPage = () => {
     </div>
   )
 }
-
-export default ResetPasswordPage

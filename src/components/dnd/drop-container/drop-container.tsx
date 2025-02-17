@@ -9,12 +9,7 @@ import {
 import { useAppDispatch } from "../../../services/hooks"
 import { IBurgerItemDragItem } from "../../../services/types"
 
-export default function DropContainer({
-  ingredientType,
-  children,
-  constructorIngredientIndex,
-  dropType,
-}: {
+interface IDropContainerProps {
   ingredientType:
     | "bun_top"
     | "middle_ingredient_to_top"
@@ -22,9 +17,16 @@ export default function DropContainer({
     | "middle_ingredient_to_bottom"
     | "bun_bottom"
   children: React.ReactNode
-  constructorIngredientIndex: number | null
+  constructorIngredientIndex?: number | null
   dropType: "bun" | "middle_ingredient" | "bun_filled" | "middle_ingredient_filled"
-}) {
+}
+
+export default function DropContainer({
+  ingredientType,
+  children,
+  constructorIngredientIndex = null,
+  dropType,
+}: IDropContainerProps): JSX.Element {
   const dispatch = useAppDispatch()
 
   const [{ isOver }, refDrop] = useDrop({
@@ -59,8 +61,4 @@ export default function DropContainer({
       {children}
     </div>
   )
-}
-
-DropContainer.defaultProps = {
-  constructorIngredientIndex: null,
 }

@@ -22,7 +22,7 @@ import { ProtectedRouteOnlyAuth, ProtectedRouteOnlyUnAuth } from "../protected-r
 import "./App.css"
 import styles from "./App.module.css"
 
-export default function App() {
+export default function App(): JSX.Element {
   const location = useLocation()
   const navigate = useNavigate()
   const background = location.state && location.state.background

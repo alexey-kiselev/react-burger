@@ -8,7 +8,7 @@ import { useAppSelector } from "../../services/hooks"
 import { selectIngredientsState } from "../../services/ingredients"
 import styles from "./home-page.module.css"
 
-const HomePage = () => {
+export default function HomePage(): JSX.Element {
   const { loading, error } = useAppSelector(selectIngredientsState)
 
   if (loading) {
@@ -43,5 +43,3 @@ const HomePage = () => {
     </DndProvider>
   )
 }
-
-export default HomePage
